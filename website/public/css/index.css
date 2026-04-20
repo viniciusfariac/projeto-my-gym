@@ -44,6 +44,8 @@ h1 {
     font-weight: bold;
 }
 
+
+/* Estilizando o h2 */
 h2 {
     font-size: 1.5rem;
     font-family: oswald, Arial, Helvetica, sans-serif;
@@ -83,7 +85,8 @@ a:hover {
 /* Margin padrão */
 nav,
 .content_hero,
-.container_what {
+.container_what,
+.container_tool {
     margin: 0 5rem;
 }
 
@@ -91,6 +94,11 @@ nav,
 .button:hover {
     background-color: var(--highlight-color-hover);
     transition: 0.5s;
+}
+
+/* bolder */
+.bolder {
+    font-weight: bolder;
 }
 
 /* Começo das estilizações por body */
@@ -196,15 +204,18 @@ main {
     align-items: center;
 }
 
+/* Cards explicando a progressão */
 .card_progression {
     background-color: var(--bg-secondary);
     padding: 2rem;
-    width: 880px;
+    width: 50%;
     border-radius: 20px;
     display: flex;
     gap: 2rem;
 }
 
+
+/* Conteúdo dos cards separado */
 .content_progression_response,
 .content_progression {
     display: flex;
@@ -212,18 +223,134 @@ main {
     gap: 1rem;
 }
 
+
+/* Card menor */
 .card_progression_less {
-    width: 500px;
+    width: 25%;
 }
 
+/* Largura do texto */
 .card_progression p {
     width: 400px;
 }
 
+/* Margin da resposta, essa é para nivelar os textos */
 .content_progression_response {
     margin-top: 3.3rem;
 }
 
-.content_progression_response p {
-    width: 310px;
+
+/* Container da parte falando sobre a ferramenta, 
+engloba container dos cards e h1 */
+.container_tool {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+}
+
+/* Centralizando h1 */
+.container_tool h1 {
+    text-align: center;
+}
+
+/* Container que cabe apenas os cards*/
+.container_card_data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Colocando imagens de cada card */
+.register {
+    background-image: url('../assets/register.jpg');
+}
+
+.data {
+    background-image: url('../assets/data.jpg');
+}
+
+.intelligent {
+    background-image: url('../assets/alert.jpg');
+}
+
+.metric {
+    background-image: url('../assets/kpi.jpg');
+}
+
+.prevetion {
+    background-image: url('../assets/prevetion.jpg');
+}
+
+.history {
+    background-image: url('../assets/history.jpg');
+}
+
+/* Ajustando a imagem do card,
+altura, largura do card, borda arredondada,
+overflow hidden para não vazar o blur e a imagem dar zoom futuramente*/
+.card_data {
+    position: relative;
+    width: 420px;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1rem;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+/* Criando pseudo elemento para ser o blur,
+posição absoluta, posiciona em cima do card_data
+transição para a animação 
+inset diz que tem um elemento ali e que ele prenche todo o espaço
+background inherit fala para pegar o background do card_data, como a imagem, cover, center*/
+.card_data::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    filter: blur(0px);
+    transition: 1s;
+}
+
+/* Conteúdo do card */
+.content_data {
+    position: relative;
+    transition: 0.5s;
+    color: white;
+}
+
+/* Adicionando quando passa o mouse: 
+efeito de desfoque (blur),
+escurecendo a foto para facilitar leitura,
+aumentando a escada da foto, efeito de zoom da imagem por conta do overflow hidden*/
+.card_data:hover::before {
+    filter: blur(8px) brightness(0.5);
+    transform: scale(1.1);
+}
+
+/* Transição no context para ele não voltar direto */
+.card_data .context{
+    transition: 1s;
+}
+
+/* Tirando o context, efeito de sumindo */
+.card_data:hover .context{
+    transition: 1s;
+    opacity: 0;
+}
+
+/* Descrição presente no site, mas não podendo ser vista */
+.card_data .desc {
+    transition: 1s;
+    opacity: 0;
+}
+
+/* Descrição podendo ser vista qunado passa o mouse */
+.card_data:hover .desc {
+    opacity: 1;
+    transition: 1s;
 }
