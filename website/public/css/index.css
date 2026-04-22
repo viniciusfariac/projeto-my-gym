@@ -1,3 +1,4 @@
+/* Importando as fontes utilizadas no site */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
@@ -12,6 +13,11 @@
     --text-dark: #FFF
 }
 
+/* Estilização html */
+html {
+    transition: 1s;
+    scroll-behavior: smooth;
+}
 
 /* Estilizando cor de fundo do body */
 body {
@@ -81,7 +87,6 @@ a:hover {
     border: none;
     border-radius: 5px;
     padding: 1rem;
-    width: 140px;
     font-weight: bold;
     font-size: 1rem;
     transition: 0.5s;
@@ -357,17 +362,22 @@ aumentando a escada da foto, efeito de zoom da imagem por conta do overflow hidd
     transition: 1s;
 }
 
+/* Container da evolução,
+engloba h1 e container de conteudo */
 .container_evolution {
     display: flex;
     flex-direction: column;
     gap: 3rem;
 }
 
+/* Conteudo, imagens e textos */
 .container_evolution_content {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
 }
 
+/* Separando imagem e texto, 2 box */
 .content_evolution {
     display: flex;
     flex-direction: column;
@@ -376,9 +386,56 @@ aumentando a escada da foto, efeito de zoom da imagem por conta do overflow hidd
     justify-content: space-around;
 }
 
+/* Imagem do conteudo */
 .content_evolution img {
     width: 30rem;
     height: 40rem;
     background-position: center;
     border-radius: 20px;
+}
+
+/* Inicio do footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-secondary);
+    margin-top: 10rem;
+    padding: 0 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tamanho da imagem */
+footer img {
+    width: 400px;
+}
+
+/* Conteúdo do footer */
+.content_footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Texto do footer */
+.text_footer{
+    width: 70%;
+    text-align: center;
+}
+
+/* menu do footer */
+.menu_footer {
+    display: flex;
+    gap: 3rem;
+}
+
+/* Itens do footer */
+.menu_footer i {
+    font-size: 2rem;
+    color: black;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5rem;
 }

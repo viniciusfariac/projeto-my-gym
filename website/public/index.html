@@ -19,6 +19,11 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
+
+    <!-- CND AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -26,15 +31,15 @@
         <header>
             <nav>
                 <ul class="menu_item">
-                    <li class="list_item"> <a href="">O que é</a></li>
-                    <li class="list_item"><a href="">O método</a></li>
-                    <li class="list_item"><a href="">A ferramenta</a></li>
-                    <li class="list_item"><a href="">Minha evolução</a></li>
+                    <li class="list_item"> <a href="#article_what">O que é</a></li>
+                    <li class="list_item"><a href="#section_progression">O método</a></li>
+                    <li class="list_item"><a href="#section_tool">A ferramenta</a></li>
+                    <li class="list_item"><a href="#section_evolution">Minha evolução</a></li>
                 </ul>
                 <ul class="menu_item menu_login">
-                    <li class="list_item"><a href="">Cadastro</a></li>
+                    <li class="list_item"><a href="cadastro.html">Cadastro</a></li>
                     <li class="list_item highlight_color">|</li>
-                    <li class="list_item"><a href="">Login</a></li>
+                    <li class="list_item"><a href="login.html">Login</a></li>
                 </ul>
             </nav>
         </header>
@@ -45,12 +50,14 @@
                 corpo mudar. A verdade é dura: treinar sem registrar sua evolução e ignorar a progressão de carga é
                 o caminho mais rápido para a estagnação e lesões. Chega de suar sem ver resultados. É hora de
                 treinar com inteligência.</p>
-            <button class="button">Saiba mais</button>
+            <div>
+                <button class="button">Saiba mais</button>
+            </div>
         </section>
     </div>
 
     <main>
-        <article class="container_what">
+        <article class="container_what" id="article_what">
             <div>
                 <h1>O QUE É</h1>
                 <figure>
@@ -73,7 +80,7 @@
             </section>
         </article>
 
-        <article class="container_progression">
+        <article class="container_progression" id="section_progression">
             <h1>COMO FUNCIONA A PROGRESSÃO DE CARGA</h1>
             <section class="card_progression">
                 <div class="content_progression">
@@ -120,7 +127,7 @@
             </section>
         </article>
 
-        <article class="container_tool">
+        <article class="container_tool" id="section_tool">
             <h1>TRANSFORME DADOS EM MÚSCULO</h1>
             <div class="container_card_data">
                 <div class="card_data register">
@@ -182,24 +189,44 @@
             </div>
         </article>
 
-        <article class="container_evolution">
+        <article class="container_evolution" id="section_evolution">
             <h1>A TEORIA NA PRÁTICA</h1>
             <section class="container_evolution_content">
                 <div class="content_evolution">
                     <p>Treinando sem métricas</p>
                     <figcaption>
-                        <img src="assets/imagem_antes.png" title="Antes da progressão de carga" alt="Imagem antes da progressão de carga">
+                        <img src="assets/imagem_antes.png" title="Antes da progressão de carga"
+                            alt="Imagem antes da progressão de carga">
                     </figcaption>
                 </div>
                 <div class="content_evolution">
                     <p>Aplicando a progressão na prática</p>
                     <figcaption>
-                        <img src="assets/imagem_depois.jpeg" title="Depois da progressão de carga" alt="Imagem depois da progressão de carga">
+                        <img src="assets/imagem_depois.jpeg" title="Depois da progressão de carga"
+                            alt="Imagem depois da progressão de carga">
                     </figcaption>
                 </div>
             </section>
         </article>
     </main>
+
+    <footer>
+        <figcaption>
+            <img src="assets/logo_mygym.png" title="Logo my gym" alt="Logo my gym">
+        </figcaption>
+        <div class="content_footer">
+            <p class="text_footer">O máximo do seu potencial está escondido nos dados que você ignora comece acompanhar
+                seu resultado</p>
+            <button class="button">INSCREVA-SE</button>
+            <ul class="menu_footer">
+                <li><a href="https://github.com/viniciusfariac"><i class="fa-brands fa-github"></i></a></li>
+                <li><a href="www.linkedin.com/in/vinicius-faria-cerqueira-62347632a"><i class="fa-brands fa-linkedin"></i></a></li>
+                <li><a href="https://instagram.com/v_f4ria"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="mailto:vfariacerqueira@gmail.com"><i class="fa-solid fa-envelope"></i></a></li>
+            </ul>
+            <p>copyright © 2026 | GITHUB: viniciusfariac</p>
+        </div>
+    </footer>
 </body>
 
 </html>
