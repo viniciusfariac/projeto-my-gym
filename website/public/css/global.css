@@ -1,7 +1,110 @@
+/* Importando as fontes utilizadas no site */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+/* Colocando as variáveis de cores */
+:root {
+    --bg-primary: #0F1115;
+    --bg-secondary: #1E2128;
+    --highlight-color: #3B82F6;
+    --highlight-color-hover: #60A5FA;
+    --text-dark: #FFF
+}
+
 * {
     margin: 0;
     padding: 0;
     list-style-type: none;
     text-decoration: none;
     box-sizing: border-box;
+}
+
+/* Estilização html */
+html {
+    transition: 1s;
+    scroll-behavior: smooth;
+}
+
+/* Estilizando cor de fundo do body */
+body {
+    background-color: var(--bg-primary);
+}
+
+/* Estilizando cor do texto */
+h1,
+p,
+li,
+a,
+h2,
+label,
+img[alt] {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Estilizando tamanho da fonte, alinhamento e qual fonte será utilizada no pagrafo e lista */
+p,
+li {
+    text-align: justify;
+    font-size: 1rem;
+    font-family: poppins, Arial, Helvetica, sans-serif;
+}
+
+
+/* Estilizando tamanho da fonte e familia do h1 */
+h1 {
+    font-size: 2rem;
+    font-family: oswald, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+/* Estilizando o h2 */
+h2 {
+    font-size: 1.5rem;
+    font-family: oswald, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+/* Transição para troca de cor */
+a {
+    transition: 0.5s;
+}
+
+/* Cor quando o usuário passar o mouse e transição para troca de cor */
+a:hover {
+    transition: 0.5s;
+    color: var(--highlight-color-hover);
+}
+
+/* bolder */
+.bolder {
+    font-weight: bolder;
+}
+
+/* Button padrão */
+.button {
+    background-color: var(--highlight-color);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 5px;
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+/* Estilização hover button */
+.button:hover {
+    background-color: var(--highlight-color-hover);
+    transition: 0.5s;
+}
+
+
+/* Estilização das cores destaque */
+.highlight_color {
+    color: var(--highlight-color);
 }
