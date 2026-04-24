@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/login.css">
 
-    <!-- CND AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CDN phosphor para olho da senha -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
 
 </head>
 
@@ -37,22 +37,32 @@
             <div class="form">
                 <div class="form_input">
                     <p for="email">Nome</p>
-                    <input type="text">
+                    <input type="text" id="ipt_name">
                 </div>
                 <div class="form_input">
                     <p for="password">Email</p>
-                    <input type="password">
+                    <input type="text" id="ipt_mail">
                 </div>
                 <div class="form_input">
                     <p for="password">Senha</p>
-                    <input type="password">
+                    <div class="content_pass">
+                        <input type="password" id="ipt_pass">
+                        <i class="ph ph-eye" id="icon_pass" onclick="showPass('ipt_pass', 'icon_pass')"></i>
+                    </div>
                 </div>
                 <div class="form_input">
                     <p for="password">Confirmar senha</p>
-                    <input type="password">
+                    <div class="content_pass">
+                        <input type="password" id="ipt_confirm_pass">
+                        <i class="ph ph-eye" id="icon_confirm"
+                            onclick="showPass('ipt_confirm_pass', 'icon_confirm')"></i>
+                    </div>
+                </div>
+                <div class="response" id="div_response">
+                    <p id="error_response"></p>
                 </div>
                 <div class="content_button">
-                    <button class="button" onclick="fazerLogin()">Login</button>
+                    <button class="button" onclick="makeLogin()">Cadastrar-se</button>
                     <p>Já tem uma conta? <a class="highlight_color" href="login.html">Entre agora</a></p>
                 </div>
 
@@ -67,3 +77,63 @@
 </body>
 
 </html>
+
+<script src="js/validation.js"></script>
+<script src="js/animation.js"></script>
+
+<script>
+    function makeLogin() {
+        // Declarando as variáveis
+        let full_name = ipt_name.value
+        let mail = ipt_mail.value
+        let pass = ipt_pass.value
+        let confirm_pass = ipt_confirm_pass.value
+
+        // Verificação de campos em branco
+        if (validating_blank_field(full_name, mail, pass, confirm_pass)) {
+            div_response.style.display = "block"
+            error_response.innerHTML = "Todos os campos precisam estar preenchidos"
+            return false
+        }
+
+        // Verificação de nome para até 3 caracteres
+        if (validating_name(full_name)) {
+            div_response.style.display = "block"
+            error_response.innerHTML = "O campo nome deve ter pelo menos 3 caracteres"
+            return false
+        }
+
+        // Validação de estrutura de email, com ponto e arroba
+        if (validating_mail(mail)) {
+            div_response.style.display = "block"
+            error_response.innerHTML = "Digite uma estrutura de email válida"
+            return false
+        }
+
+        // Validação de senha
+        if (validating_pass(pass)) {
+            div_response.style.display = "block"
+            error_response.innerHTML = "Senha precisa ter: 8 caracteres, numeros, letra maiúscula, letra minúscula, caracter especial e não pode repetir caracter junto"
+            return false
+        }
+
+        // Conferindo se as senhas coincidem
+        if (validating_confirm_pass(pass, confirm_pass)) {
+            div_response.style.display = "block"
+            error_response.innerHTML = "As senhas precisam coincidir"
+            return false
+        }
+
+        // Validando se a senha não tem o nome do usuário
+        let pass_name = validating_pass_name(pass, full_name)
+        if (pass_name.length > 0) {
+            div_response.style.display = "block"
+            error_response.innerHTML = `A senha não pode ter parte do seu nome, como por exemplo: ${pass_name}`
+            return false
+        }
+
+        // Aplicando display none se tudo estiver correto
+        div_response.style.display = "none"
+    }
+
+</script>

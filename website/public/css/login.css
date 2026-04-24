@@ -1,10 +1,19 @@
+:root {
+    --bg-primary: #0F1115;
+    --bg-secondary: #1E2128;
+    --highlight-color: #3B82F6;
+    --highlight-color-hover: #60A5FA;
+    --text-dark: #FFF
+}
+
+/* Estilização para o body */
 body {
     max-width: 100vw;
     height: 100vh;
     display: flex;
 }
 
-
+/* Estilização para o conteiner de login */
 .container_login {
     width: 50vw;
     height: 100%;
@@ -13,10 +22,13 @@ body {
     align-items: center;
 }
 
+/* Estilização para a logo */
 .container_login img {
     width: 400px;
 }
 
+
+/* Estilização do conteúdo do login, contando h1 e credencais */
 .content_data {
     display: flex;
     flex-direction: column;
@@ -25,11 +37,13 @@ body {
     height: 100%;
 }
 
+/* Centralização do titulo e subtitulo */
 h1,
 .credenciais {
     text-align: center;
 }
 
+/* Estilização do formulário */
 .form {
     display: flex;
     flex-direction: column;
@@ -40,12 +54,14 @@ h1,
     width: 100%;
 }
 
+/* Estilização das boxes que guardam os p e inputs do formulário */
 .form_input {
     display: flex;
     flex-direction: column;
     width: 70%;
 }
 
+/* Estilização somente do input do formulário */
 .form_input input {
     width: 100%;
     padding: 0.5rem;
@@ -56,6 +72,38 @@ h1,
     font-size: 1rem;
 }
 
+/* Caixa que guarda o icon de olho e input */
+.content_pass {
+    position: relative;
+    display: flex;
+}
+
+/* Estilização do icon de olho */
+.ph {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    bottom: 0.4rem;
+    right: 0.5rem;
+    cursor: pointer;
+}
+
+/* Resposta em caso de erro */
+.response {
+    display: none;
+    margin: 0 auto;
+}
+
+/* Texto da div em caso de erro */
+.response p {
+    color: red;
+    font-size: 0.7rem;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Caixa do botão, engloba botão e pergunta de conta */
 .content_button {
     display: flex;
     flex-direction: column;
@@ -65,15 +113,19 @@ h1,
     margin-top: 1rem;
 }
 
+/* Imagem do container */
 .container_image img {
     width: 50vw;
     height: 100%;
+    border-radius: 10px;
 }
 
+/* Botão estilização somente da largura dinâmica */
 .button {
     padding: 1rem 8rem;
 }
 
+/* Footer com copyright */
 .copyright {
     position: absolute;
     bottom: 0;

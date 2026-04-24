@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/login.css">
 
-    <!-- CND AWESOME -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CDN phosphor para olho da senha -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
 
 </head>
 
@@ -37,17 +37,19 @@
             <div class="form">
                 <div class="form_input">
                     <p for="email">Email</p>
-                    <input type="text">
+                    <input type="text" id="ipt_email">
                 </div>
                 <div class="form_input">
                     <p for="password">Senha</p>
-                    <input type="password">
+                    <input type="password" id="ipt_pass">
+
                 </div>
                 <div class="content_button">
                     <button class="button" onclick="fazerLogin()">Login</button>
                     <p>Não tem conta? <a class="highlight_color" href="register.html">Regitre-se agora</a></p>
+                    <i class="ph ph-eye" style="font-size: 50px; color: white;"></i>
                 </div>
-                
+
             </div>
 
             <p class="copyright">copyright © 2026 | GITHUB: viniciusfariac</p>
@@ -59,3 +61,4 @@
 </body>
 
 </html>
+<script src="js/animation.js"></script>
