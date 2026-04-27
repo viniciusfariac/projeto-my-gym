@@ -88,4 +88,3 @@ CREATE TABLE IF NOT EXISTS training_set (
 	CONSTRAINT fk_training_log FOREIGN KEY (training_log_id) REFERENCES training_log(id_training_log),
 	CONSTRAINT ckc_type CHECK (type_set IN ('Falha', 'Aquecimento', 'Trabalho', 'Top-set'))
 );
-

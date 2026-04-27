@@ -1,0 +1,5 @@
+CREATE USER 'user_my_gym' IDENTIFIED BY '#Sptech@2026';
+
+GRANT SELECT, UPDATE, DELETE, INSERT ON db_my_gym.* TO 'user_my_gym';
+
+FLUSH PRIVILEGES;
