@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     
     PRIMARY KEY (id_user)
 );
-
+SELECT * FROM user;
 CREATE TABLE IF NOT EXISTS exercise(
 	id_exercise INT NOT NULL AUTO_INCREMENT,
     url_image VARCHAR(255),
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS training (
 	CONSTRAINT fk_user_exercise FOREIGN KEY (user_exercise_id) REFERENCES user_exercise(id_user_exercise),
     
     CONSTRAINT ckc_status CHECK (status IN ('Ativo', 'Inativo')), 
-    CONSTRAINT ckc_day CHECK (status IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'))
+    CONSTRAINT ckc_day CHECK (suggest_day IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'))
 );
 
 CREATE TABLE IF NOT EXISTS training_log (
@@ -88,3 +88,47 @@ CREATE TABLE IF NOT EXISTS training_set (
 	CONSTRAINT fk_training_log FOREIGN KEY (training_log_id) REFERENCES training_log(id_training_log),
 	CONSTRAINT ckc_type CHECK (type_set IN ('Falha', 'Aquecimento', 'Trabalho', 'Top-set'))
 );
+
+INSERT INTO exercise (exercise_name, muscle_group, description, url_image) VALUES
+('Supino Reto', 'Peito', 'Exercício para peitoral com barra', NULL),
+('Agachamento Livre', 'Quadriceps', 'Exercício composto para pernas', NULL),
+('Puxada na Barra', 'Costas', 'Exercício para dorsais', NULL),
+('Rosca Direta', 'Bíceps', 'Exercício para bíceps', NULL),
+('Tríceps Corda', 'Tríceps', 'Exercício isolado para tríceps', NULL);
+
+INSERT INTO user_exercise (exercise_id, user_id) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1);
+
+INSERT INTO training (user_exercise_id, name_training, type_training, status, suggest_day) VALUES
+(1, 'Treino A', 'Peito e Tríceps', 'Ativo', 'Segunda'),
+(2, 'Treino B', 'Pernas', 'Ativo', 'Terça'),
+(3, 'Treino C', 'Costas e Bíceps', 'Ativo', 'Quarta');
+
+INSERT INTO training_log (training_id, training_date) VALUES
+(1, '2026-04-25'),
+(2, '2026-04-26'),
+(3, '2026-04-27');
+
+
+INSERT INTO training_set (training_log_id, set_order, rep, weight, type_set) VALUES
+(1, 1, 12, 40.00, 'Aquecimento'),
+(1, 2, 10, 60.00, 'Trabalho'),
+(1, 3, 8, 70.00, 'Top-set');
+
+
+INSERT INTO training_set (training_log_id, set_order, rep, weight, type_set) VALUES
+(2, 1, 12, 50.00, 'Aquecimento'),
+(2, 2, 10, 80.00, 'Trabalho'),
+(2, 3, 6, 100.00, 'Top-set');
+
+
+INSERT INTO training_set (training_log_id, set_order, rep, weight, type_set) VALUES
+(3, 1, 12, 30.00, 'Aquecimento'),
+(3, 2, 10, 50.00, 'Trabalho'),
+(3, 3, 8, 60.00, 'Falha');
+
+SELECT * FROM user;
