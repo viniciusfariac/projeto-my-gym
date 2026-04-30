@@ -89,6 +89,9 @@ CREATE TABLE IF NOT EXISTS training_set (
 	CONSTRAINT ckc_type CHECK (type_set IN ('Falha', 'Aquecimento', 'Trabalho', 'Top-set'))
 );
 
+
+-- INSERTS PARA TESTE
+
 INSERT INTO `user` (username, email, user_password) VALUES
 ('vinicius', 'vinicius@gmail.com', '1234');
 
@@ -136,6 +139,9 @@ INSERT INTO training_exercise (exercise_id, training_id, set_exercise) VALUES
 (19, 3, 3);
 
 INSERT INTO training_log (training_exercise_id, training_date) VALUES
+(1, '2026-05-10 10:40:00');
+
+INSERT INTO training_log (training_exercise_id, training_date) VALUES
 (2, '2026-04-30 10:40:00'),
 (3, '2026-04-30 10:50:00'),
 (4, '2026-04-30 11:00:00'),
@@ -155,35 +161,7 @@ INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VAL
 (2, 3, 10, 30, 'Trabalho'),
 (3, 3, 6, 40, 'Falha');
 
-SELECT * FROM training_log;
-
-
--- SELECTS TESTES
-
-SELECT
-	te.id_training_exercise,
-	t.name_training,
-    e.exercise_name
-FROM
-	training t
-JOIN training_exercise te ON t.id_training = te.training_id
-JOIN exercise e ON e.id_exercise = te.exercise_id;
-
-
--- Select com todos os dados
-SELECT 
-	u.username,
-    t.name_training,
-    e.exercise_name,
-    tr.training_date,
-    ts.set_order,
-    ts.rep,
-    ts.weight,
-    ts.type_set
-FROM
-	user u
-JOIN training t ON u.id_user = t.user_id
-JOIN training_exercise te ON te.training_id = t.id_training
-JOIN exercise e ON e.id_exercise = te.exercise_id
-JOIN training_log tr ON tr.training_exercise_id = te.id_training_exercise
-JOIN training_set ts ON ts.training_log_id = tr.id_training_log;
+INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VALUES
+(1, 10, 12, 22, 'Trabalho'),
+(2, 10, 10, 24, 'Trabalho'),
+(3, 10, 8, 28, 'Falha');
