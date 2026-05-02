@@ -40,14 +40,16 @@ li,
 a,
 h2,
 label,
-img[alt] {
+img[alt],
+span {
     color: var(--text-dark);
     line-height: 1.6;
 }
 
 /* Estilizando tamanho da fonte, alinhamento e qual fonte será utilizada no pagrafo e lista */
 p,
-li {
+li,
+span {
     text-align: justify;
     font-size: 1rem;
     font-family: poppins, Arial, Helvetica, sans-serif;

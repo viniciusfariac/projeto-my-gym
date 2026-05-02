@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8"> <!--UTF-8 utilizado para codificação de caracteres-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Responsividade-->
+
+    <!-- Adicionados para gerenciar meta dados da página HTML -->
+    <!-- Descrição para o motor de busca -->
+    <meta name="description" content="Site para registro de progressão de carga voltado para praticantes de academia">
+
+    <!-- Força navegador emular utilizando o motor mais moderno possível -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Palavras chaves para o site ser encontrado-->
+    <meta name="keywords" content="academia, gym, myGym, progressão de carga, ">
+    <!-- Titúlo do site -->
+    <title>My Gym</title>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <aside class="aside">
+        <div class="aside_header">
+            <img src="../assets/logo_mygym.png" alt="Logo My Gym" title="Logo My Gym">
+        </div>
+        <div class="aside_main">
+            <nav class="nav_container">
+                <ul class="list_nav">
+                    <li class="item_list">Dashboard</li>
+                    <div class="list_ref">
+                        <li class="item_list"><a href="dashboard.html">Geral</a></li>
+                        <li class="item_list"><a href="dashboard_training.html">Treinos</a></li>
+                    </div>
+                </ul>
+            </nav>
+            <nav class="nav_container">
+                <ul class="list_nav">
+                    <li class="item_list">Treinos</li>
+                    <div class="list_ref">
+                        <li class="item_list"><a href="training_set.html" id="training_available">Upper A</a></li>
+                        <li class="item_list"><a href="training_set.html" id="training_available">Upper B</a></li>
+                        <li class="item_list"><a href="training_set.html" id="training_available">Lower A</a></li>
+                        <li class="item_list"><a href="training_set.html" id="training_available">Lower B</a></li>
+                    </div>
+                </ul>
+            </nav>
+            <nav class="nav_container">
+                <ul class="list_nav">
+                    <li class="item_list"><a href="register_training.html">Cadastrar treino</a></li>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+        <div class="aside_footer">
+            <p class="user_name">Usuário: <span id="user_name">Vinicius Faria</span></p>
+        </div>
+    </aside>
+
+    <main>
+        <article class="kpi_container">
+            <div class="kpi">
+                <p>Você faltou</p>
+                <p class="kpi-highlight"><span id="kpi-day" class="kpi-highlight">1</span> dia(s) na academia</p>
+                <p class="kpi-base">Com base nos últimos 30 dias</p>
+            </div>
+            <div class="kpi">
+                <p>Seu horário mais frequente</p>
+                <p class="kpi-highlight kpi-highlight-often" id="kpi-often">16 horas</p>
+                <p class="kpi-base">Com base nos últimos 30 dias</p>
+            </div>
+            <div class="kpi">
+                <p>Você perdeu </p>
+                <p class="kpi-highlight"><span id="kpi-day" class="kpi-highlight">1 treino de upper A</span></p>
+                <p class="kpi-base">Com base nos últimos 30 dias</p>
+            </div>
+        </article>
+        <article class="container_graph">
+            <h1>Frequência na academia</h1>
+            <canvas class="graph"></canvas>
+        </article>
+        <article class="container_graph">
+            <h1>Dias de treino</h1>
+            <canvas class="graph"></canvas>
+        </article>
+    </main>
+</body>
+
+</html>

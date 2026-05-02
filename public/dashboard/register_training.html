@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8"> <!--UTF-8 utilizado para codificação de caracteres-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Responsividade-->
+
+    <!-- Adicionados para gerenciar meta dados da página HTML -->
+    <!-- Descrição para o motor de busca -->
+    <meta name="description" content="Site para registro de progressão de carga voltado para praticantes de academia">
+
+    <!-- Força navegador emular utilizando o motor mais moderno possível -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Palavras chaves para o site ser encontrado-->
+    <meta name="keywords" content="academia, gym, myGym, progressão de carga, ">
+    <!-- Titúlo do site -->
+    <title>My Gym</title>
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+    <aside class="aside">
+        <div class="aside_header">
+            <img src="../assets/logo_mygym.png" alt="Logo My Gym" title="Logo My Gym">
+        </div>
+        <div class="aside_main">
+            <nav class="nav_container">
+                <ul class="list_nav">
+                    <li class="item_list">Dashboard</li>
+                    <div class="list_ref">
+                        <li class="item_list"><a href="dashboard.html">Geral</a></li>
+                        <li class="item_list"><a href="dashboard_training.html">Treinos</a></li>
+                    </div>
+                </ul>
+            </nav>
+            <nav class="nav_container">
+                <ul class="list_nav">
+                    <li class="item_list">Treinos</li>
+                    <div class="list_ref">
+                        <li class="item_list"><a href="training_set.html" id="training_available">Upper A</a></li>
+                        <li class="item_list"><a href="training_set.html" id="training_available">Upper B</a></li>
+                        <li class="item_list"><a href="training_set.html" id="training_available">Lower A</a></li>
+                        <li class="item_list"><a href="training_set.html" id="training_available">Lower B</a></li>
+                    </div>
+                </ul>
+            </nav>
+            <nav class="nav_container">
+                <ul class="list_nav">
+                    <li class="item_list"><a href="register_training.html">Cadastrar treino</a></li>
+        </div>
+        </ul>
+        </nav>
+        </div>
+        <div class="aside_footer">
+            <p class="user_name">Usuário: <span id="user_name">Vinicius Faria</span></p>
+        </div>
+    </aside>
+
+
+    <main>
+        <article class="container_register">
+            <div class="card_info">
+                <h1>Cadastrar treino</h1>
+                <p>Preencha as informações e monte os exercícios do treino</p>
+                <div class="stepper">
+                    <div class="step completed">
+                        <div class="circle">✔</div>
+                        <div class="label">Identificação</div>
+                    </div>
+
+                    <div class="step completed">
+                        <div class="circle">✔</div>
+                        <div class="label">Dias</div>
+                    </div>
+
+                    <div class="step active">
+                        <div class="circle">3</div>
+                        <div class="label">Exercícios</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card_form">
+                <div class="title_form">
+                    <p>Identificação</p>
+                </div>
+                <div class="box_form">
+                    <div class="form_content">
+                        <p>Nome do treino</p>
+                        <input type="text">
+                    </div>
+                    <div class="form_content">
+                        <p>Tipo do treino</p>
+                        <input type="text">
+                    </div>
+                    <div class="form_content">
+                        <p>Quantidade de exercícios</p>
+                        <input type="number">
+                    </div>
+                </div>
+                <div class="container_days">
+                    <p>Dias da semana</p>
+                    <div class="content_days">
+                        <div class="">
+                            <button class="day_btn selected">Seg</button>
+                        </div>
+                        <div class="form_content">
+                            <button class="day_btn">Ter</button>
+                        </div>
+                        <div class="form_content">
+                            <button class="day_btn">Qua</button>
+                        </div>
+                        <div class="form_content">
+                            <button class="day_btn">Qui</button>
+                        </div>
+                        <div class="">
+                            <button class="day_btn">Sex</button>
+                        </div>
+                        <div class="form_content">
+                            <button class="day_btn">Sab</button>
+                        </div>
+                        <div class="form_content">
+                            <button class="day_btn">Dom</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card_form">
+                <div class="title_form">
+                    <p>Exercícios do treino</p>
+                </div>
+                <div class="card_exercise">
+                    <div class="title_exercise">
+                        <p>Exercício 1</p>
+                    </div>
+                    <div class="content_exercise">
+                        <div class="container_choices">
+                            <div class="choice_group">
+                                <span>Grupo muscular</span>
+                                <select id="">
+                                    <option value="">Peito</option>
+                                    <option value="">Ombro</option>
+                                    <option value="">Triceps</option>
+                                    <option value="">Quadriceps</option>
+                                    <option value="">Glúteos</option>
+                                    <option value="">Costas</option>
+                                    <option value="">Bíceps</option>
+                                    <option value="">Antebraço</option>
+                                    <option value="">Panturrilha</option>
+                                    <option value="">Adbomên</option>
+                                </select>
+                            </div>
+                            <div class="choice_group">
+                                <span>Exercício</span>
+                                <select id="">
+                                    <option value="">Supino</option>
+                                    <option value="">Pulley</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="choice_set">
+                            <p>Séries para esse exercício</p>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="card_exercise">
+                    <div class="title_exercise">
+                        <p>Exercício 2</p>
+                    </div>
+                    <div class="content_exercise">
+                        <div class="container_choices">
+                            <div class="choice_group">
+                                <span>Grupo muscular</span>
+                                <select id="">
+                                    <option value="">Peito</option>
+                                    <option value="">Ombro</option>
+                                    <option value="">Triceps</option>
+                                    <option value="">Quadriceps</option>
+                                    <option value="">Glúteos</option>
+                                    <option value="">Costas</option>
+                                    <option value="">Bíceps</option>
+                                    <option value="">Antebraço</option>
+                                    <option value="">Panturrilha</option>
+                                    <option value="">Adbomên</option>
+                                </select>
+                            </div>
+                            <div class="choice_group">
+                                <span>Exercício</span>
+                                <select id="">
+                                    <option value="">Supino</option>
+                                    <option value="">Pulley</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="choice_set">
+                            <p>Séries para esse exercício</p>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="card_exercise">
+                    <div class="title_exercise">
+                        <p>Exercício 3</p>
+                    </div>
+                    <div class="content_exercise">
+                        <div class="container_choices">
+                            <div class="choice_group">
+                                <span>Grupo muscular</span>
+                                <select id="">
+                                    <option value="">Peito</option>
+                                    <option value="">Ombro</option>
+                                    <option value="">Triceps</option>
+                                    <option value="">Quadriceps</option>
+                                    <option value="">Glúteos</option>
+                                    <option value="">Costas</option>
+                                    <option value="">Bíceps</option>
+                                    <option value="">Antebraço</option>
+                                    <option value="">Panturrilha</option>
+                                    <option value="">Adbomên</option>
+                                </select>
+                            </div>
+                            <div class="choice_group">
+                                <span>Exercício</span>
+                                <select id="">
+                                    <option value="">Supino</option>
+                                    <option value="">Pulley</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="choice_set">
+                            <p>Séries para esse exercício</p>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+                <div class="container_add">
+                    <button class="button_add">Adicionar mais um exercício</button>
+                </div>
+                <div class="container_submit">
+                    <button class="button_register">Cadastrar treino</button>
+                </div>
+            </div>
+        </article>
+    </main>
+</body>
+
+</html>

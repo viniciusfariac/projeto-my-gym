@@ -1,0 +1,595 @@
+/* Importando as fontes utilizadas no site */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+/* Colocando as variáveis de cores */
+:root {
+    --bg-primary: #0F1115;
+    --bg-secondary: #1E2128;
+    --bg-third: #1e1e2f;
+    --bg-fourth: #151528;
+    --highlight-color: #3B82F6;
+    --highlight-color-hover: #60A5FA;
+    --hover-third: #3a3a50;
+    --text-dark: #FFF;
+}
+
+
+body {
+    display: flex;
+}
+
+/* Estilo do aside */
+aside {
+    min-height: 100vh;
+    max-height: 100%;
+    padding-bottom: 1rem;
+    padding-top: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-right: 2px solid var(--highlight-color);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Logo do my gym */
+.aside img {
+    width: 14rem;
+}
+
+/* Cabeçalho do aside */
+.aside_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteúdo do aside */
+.aside_main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* lista do nav */
+.list_nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Itens do nav */
+.list_ref {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+/* Conteúdo principal */
+main {
+    padding: 2rem 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+
+/* Tela da dashboard principal */
+
+/* Container da kpi */
+.kpi_container {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Box da kpi */
+.kpi {
+    background-color: var(--bg-third);
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: 1s;
+    cursor: pointer;
+}
+
+/* Hover para mover um pouco para cima quando passar o mouse */
+.kpi:hover {
+    transform: translateY(-9px);
+    transition: 1s;
+}
+
+/* Texto em destaque da kpi */
+.kpi-highlight {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: red;
+}
+
+.kpi-highlight-often {
+    color: green;
+}
+
+/* Texto da parte do tempo da kpi */
+.kpi-base {
+    opacity: 0.4;
+}
+
+/* Container dos gráficos */
+.container_graph {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Centralizando o titulo do gráfico */
+.container_graph h1 {
+    text-align: center;
+}
+
+/* Box do gráfico */
+.graph {
+    margin-left: 5rem;
+    border: 1px solid var(--bg-secondary);
+    width: 89%;
+    height: 50vh;
+    border-radius: 1rem;
+}
+
+
+
+/* Tela para cadastrar serie */
+.container_training {
+    background-color: var(--bg-secondary);
+    width: 70%;
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 10px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Conteiner dos exercícios */
+.container_exercise {
+    display: flex;
+    gap: 4rem;
+    height: 100%;
+}
+
+/* Conteudo dos exercícios */
+.content_exercise {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Conteúdo principal dos exercícios */
+.content_main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 6rem;
+    flex-wrap: wrap;
+}
+
+/* Padrão do input */
+.input_set input {
+    background-color: var(--bg-third);
+    border: 1px solid #2c2c3a;
+    border-radius: 10px;
+    padding: 0.5rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.5s ease;
+    width: 40%;
+}
+
+/* Quando passa por cima, cor suave */
+.input_set input:hover {
+    border-color: var(--bg-third);
+    transition: all 0.5 ease;
+}
+
+/* Quando clica no input */
+.input_set input:focus {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.2);
+}
+
+/* Placeholder do input */
+.input_set input::placeholder {
+    color: var(--bg-third);
+}
+
+/* Tirando setinha do type number navegadores*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Tirando setinha do type number firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Estilização das imagens dos exercícios */
+.container_exercise img {
+    width: 35%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Estilização botão para enviar serie */
+.button_input {
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+
+/* Background color do botão */
+.button {
+    background-color: var(--bg-third);
+}
+
+/* Container da dash */
+.container_dash_training {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    padding: 2px;
+    transition: 1s;
+}
+
+.container_dash_training:hover {
+    transform: translateY(-6px);
+    transition: 1s;
+}
+
+/* Container das escolhas */
+.container_choice {
+    background-color: var(--bg-fourth);
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+/* Estilização para conteúdo
+select e h1 */
+.content_choices {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilização do select */
+.choices {
+    background-color: var(--bg-third);
+    border: 1px solid #2c2c3a;
+    border-radius: 10px;
+    padding: 12px;
+    color: var(--text-dark);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/* Hover quando passar por cima das escolhas */
+.choices:hover {
+    border-color: var(--hover-third);
+    transition: 0.5s;
+}
+
+/* Ao clicar nas escolhas*/
+.choices:focus {
+    border-color: var(--highlight-color-hover);
+}
+
+/* Estilização para remover padrão do select */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5H5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+/* Estilização página de cadastro de treino */
+
+.container_register {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* container do progresso*/
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* box para cada etapa, label e circle */
+.step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+/* Estilização do círculo */
+.circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 2px solid var(--bg-fourth);
+    color: var(--text-dark);
+}
+
+/* Estilização do texto */
+.label {
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+/* estado concluído */
+.step.completed .circle {
+    background-color: var(--highlight-color);
+    border: none;
+    color: var(--text-dark);
+}
+
+/* estado ativo */
+.step.active .circle {
+    border: 2px solid var(--highlight-color-hover);
+}
+
+.card_form {
+    padding: 2rem;
+    background-color: var(--bg-fourth);
+    border-radius: 10px;
+    border: 2px solid var(--bg-third);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.title_form p {
+    font-weight: bold;
+}
+
+.box_form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_content input {
+    background-color: var(--bg-third);
+    border: 1px solid #2c2c3a;
+    border-radius: 10px;
+    padding: 0.5rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.5s;
+}
+
+.form_content input:hover {
+    border-color: var(--hover-third);
+    transition: 0.5s;
+}
+
+.form_content input:focus {
+    border-color: var(--highlight-color-hover);
+}
+
+.container_days {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.content_days {
+    display: flex;
+    gap: 1rem;
+}
+
+.day_btn {
+    background: var(--bg-third);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.7rem 2rem;
+    color: var(--text-dark);
+    font-size: 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.day_btn.selected {
+    background-color: var(--highlight-color);
+    border-color: var(--bg-third);
+    color: var(--text-dark);
+    transition: 0.5s;
+}
+
+.day_btn:hover {
+    transform: translateY(-4px);
+}
+
+.card_exercise {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid var(--bg-third);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.content_exercise {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4rem;
+}
+
+.container_choices {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.choice_group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.choice_group select {
+    background-color: var(--bg-third);
+    border: 1px solid #2c2c3a;
+    border-radius: 1rem;
+    width: 30%;
+    padding: 1rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+.choice_group select:hover {
+    border: 1px solid var(--hover-third);
+    transition: 0.5s;
+}
+
+.choice_group select:focus {
+    border: 1px solid var(--highlight-color-hover);
+    transition: 0.5s;
+}
+
+.choice_exercise {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.choice_exercise select {
+    background-color: var(--bg-third);
+    border: 1px solid #2c2c3a;
+    border-radius: 1rem;
+    width: 52%;
+    padding: 1rem;
+    color: var(--text-dark);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.choice_exercise select:hover {
+    border: 1px solid var(--hover-third);
+    transition: 0.5s;
+}
+
+.choice_exercise select:focus {
+    border: 1px solid var(--highlight-color-hover);
+    transition: 0.5s;
+}
+
+.choice_set {
+    display: flex;
+    flex-direction: column;
+}
+
+.choice_set input {
+    padding: 1rem;
+    background-color: var(--bg-third);
+    border: none;
+    outline: none;
+    color: var(--text-dark);
+    border-radius: 10px;
+    border: 1px solid #2c2c3a;
+    transition: 0.5s;
+}
+
+.choice_set input:hover {
+    border: 1px solid var(--hover-third);
+    transition: 0.5s;
+}
+
+.choice_set input:focus {
+    border: 1px solid var(--highlight-color-hover);
+    transition: 0.5s;
+}
+
+.container_add .button_add {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--bg-third);
+    border: 2px solid transparent;
+    outline: none;
+    border-radius: 10px;
+    color: var(--text-dark);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.container_add .button_add:hover {
+    transition: 0.5s;
+    border: 2px solid var(--hover-third);
+}
+
+.container_add .button_add:active {
+    background-color: var(--hover-third);
+    transition: 0.5s;
+}
+
+.container_submit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.container_submit .button_register {
+    padding: 1rem;
+    width: 15%;
+    background-color: var(--highlight-color);
+    border: none;
+    outline: none;
+    color: var(--text-dark);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.container_submit .button_register:hover {
+    transition: 0.5s;
+    background-color: var(--highlight-color-hover);
+    transform: translateY(-4px);
+    color: var(--bg-primary);
+}
