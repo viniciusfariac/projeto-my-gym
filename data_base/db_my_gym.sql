@@ -165,3 +165,91 @@ INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VAL
 (1, 10, 12, 22, 'Trabalho'),
 (2, 10, 10, 24, 'Trabalho'),
 (3, 10, 8, 28, 'Falha');
+	
+
+
+-- SEMANA 1
+INSERT INTO training_log (training_exercise_id, training_date) VALUES
+(1, '2026-05-12 10:00:00'),
+(2, '2026-05-12 10:10:00'),
+(3, '2026-05-12 10:20:00'),
+(4, '2026-05-12 10:30:00'),
+(5, '2026-05-12 10:40:00'),
+
+(7, '2026-05-14 10:00:00'),
+(8, '2026-05-14 10:10:00'),
+(9, '2026-05-14 10:20:00'),
+
+(10, '2026-05-16 09:00:00'),
+(11, '2026-05-16 09:10:00'),
+(12, '2026-05-16 09:20:00'),
+(13, '2026-05-16 09:30:00'),
+
+(1, '2026-05-17 09:00:00'),
+(2, '2026-05-17 09:10:00'),
+(3, '2026-05-17 09:20:00');
+
+
+INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VALUES
+-- Supino Inclinado evolução
+(1, 11, 12, 22, 'Trabalho'),
+(2, 11, 10, 24, 'Trabalho'),
+(3, 11, 8, 28, 'Falha'),
+
+-- Supino reto mais reps
+(1, 12, 12, 24, 'Trabalho'),
+(2, 12, 11, 24, 'Trabalho'),
+(3, 12, 9, 26, 'Falha'),
+
+-- Triceps
+(1, 13, 12, 18, 'Trabalho'),
+(2, 13, 10, 20, 'Trabalho'),
+(3, 13, 8, 24, 'Falha'),
+
+-- Costas mantém
+(1, 14, 12, 40, 'Trabalho'),
+(2, 14, 10, 45, 'Trabalho'),
+(3, 14, 8, 50, 'Falha'),
+
+-- Bíceps
+(1, 15, 12, 12, 'Trabalho'),
+(2, 15, 10, 14, 'Trabalho'),
+(3, 15, 8, 16, 'Falha');
+
+INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VALUES
+-- Supino Inclinado mais peso
+(1, 16, 10, 26, 'Trabalho'),
+(2, 16, 8, 28, 'Trabalho'),
+(3, 16, 6, 32, 'Falha'),
+
+-- Supino declinado melhor reps
+(1, 17, 12, 24, 'Trabalho'),
+(2, 17, 11, 26, 'Trabalho'),
+(3, 17, 9, 28, 'Falha'),
+
+-- Remada
+(1, 18, 12, 50, 'Trabalho'),
+(2, 18, 10, 55, 'Trabalho'),
+(3, 18, 8, 60, 'Falha');
+
+INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VALUES
+-- Supino caiu 
+(1, 19, 10, 26, 'Trabalho'),
+(2, 19, 8, 26, 'Trabalho'),
+(3, 19, 6, 28, 'Falha'),
+
+-- Bíceps travado
+(1, 20, 10, 14, 'Trabalho'),
+(2, 20, 9, 14, 'Trabalho'),
+(3, 20, 7, 16, 'Falha');
+
+INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VALUES
+-- PR no supino
+(1, 21, 12, 28, 'Trabalho'),
+(2, 21, 10, 30, 'Trabalho'),
+(3, 21, 8, 34, 'Falha'),
+
+-- Perna evoluindo
+(1, 22, 12, 80, 'Trabalho'),
+(2, 22, 10, 90, 'Trabalho'),
+(3, 22, 8, 100, 'Falha');
