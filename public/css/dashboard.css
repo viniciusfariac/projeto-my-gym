@@ -383,7 +383,13 @@ select {
 
 .box_form {
     display: flex;
-    justify-content: space-between;
+    gap: 2rem;
+}
+
+.box_exercise {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .form_content input {
@@ -547,8 +553,13 @@ select {
     transition: 0.5s;
 }
 
-.container_add .button_add {
-    width: 100%;
+.container_button {
+    display: flex;
+    gap: 1rem;
+}
+
+.container_button .button {
+    width: 30%;
     padding: 1rem;
     background-color: var(--bg-third);
     border: 2px solid transparent;
@@ -559,12 +570,12 @@ select {
     cursor: pointer;
 }
 
-.container_add .button_add:hover {
+.container_button .button:hover {
     transition: 0.5s;
     border: 2px solid var(--hover-third);
 }
 
-.container_add .button_add:active {
+.container_button .button:active {
     background-color: var(--hover-third);
     transition: 0.5s;
 }

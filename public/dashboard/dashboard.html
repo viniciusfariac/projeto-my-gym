@@ -64,12 +64,12 @@
         <article class="kpi_container">
             <div class="kpi">
                 <p>Você faltou</p>
-                <p class="kpi-highlight"><span id="kpi-day" class="kpi-highlight">1</span> dia(s) na academia</p>
+                <p class="kpi-highlight"><span id="kpi_day" class="kpi-highlight">1</span> dia(s) na academia</p>
                 <p class="kpi-base">Com base nos últimos 30 dias</p>
             </div>
             <div class="kpi">
                 <p>Seu horário mais frequente</p>
-                <p class="kpi-highlight kpi-highlight-often" id="kpi-often">16 horas</p>
+                <p class="kpi-highlight kpi-highlight-often" id="kpi_often">16 horas</p>
                 <p class="kpi-base">Com base nos últimos 30 dias</p>
             </div>
             <div class="kpi">
@@ -79,14 +79,32 @@
             </div>
         </article>
         <article class="container_graph">
-            <h1>Frequência na academia</h1>
+            <h1>Frequência no mês</h1>
             <canvas class="graph"></canvas>
         </article>
         <article class="container_graph">
-            <h1>Dias de treino</h1>
+            <h1>Frequência na semana</h1>
             <canvas class="graph"></canvas>
         </article>
     </main>
 </body>
 
 </html>
+
+<script>
+    let miss_day = 1
+
+    let miss_training = 1
+
+    let miss_name = 'Upper A'
+
+    kpi_day.innerHTML = `${miss_day} hora`
+
+    if (miss_day <= 0) {
+        kpi_day.style.color = "green"
+    } else if (miss_day >= 4) {
+        kpi_day.style.color = "yellow"
+    } else {
+        kpi_day.style.color = "red"
+    }
+</script>
