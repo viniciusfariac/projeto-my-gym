@@ -1,16 +1,16 @@
 var database = require("../database/config");
 
-function buscarTreinoPorUsuario(treinoId) {
+function buscarTreinoPorUsuario(user_id) {
 
-  var instrucaoSql = `SELECT * FROM training t WHERE id_training = ${treinoId}`;
+  var instrucaoSql = `SELECT * FROM training t WHERE user_id = ${user_id}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(treinoId, observacao) {
+function cadastrarTreino(user_id, name_training, suggest_day, type_training) {
   
-  var instrucaoSql = `INSERT INTO (observacao, id_training) camara VALUES (${observacao}, ${treinoId})`;
+  var instrucaoSql = `INSERT INTO training (user_id, name_training, suggest_day, type_training) VALUES (${user_id}, "${name_training}", "${suggest_day}", "${type_training}")`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -19,5 +19,5 @@ function cadastrar(treinoId, observacao) {
 
 module.exports = {
   buscarTreinoPorUsuario,
-  cadastrar
+  cadastrarTreino
 }

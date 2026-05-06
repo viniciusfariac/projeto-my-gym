@@ -56,7 +56,7 @@
         </nav>
         </div>
         <div class="aside_footer">
-            <p class="user_name">Usuário: <span id="user_name">Vinicius Faria</span></p>
+            <p class="user_name">Usuário: <span id="user_name"></span></p>
         </div>
     </aside>
 
@@ -65,48 +65,69 @@
             <section class="container_choice">
                 <div class="content_choices">
                     <h1>Escolha seu treino</h1>
-                    <select name="" id="" class="choices">
-                        <option value="">Upper A</option>
-                        <option value="">Upper B</option>
-                        <option value="">Lower A</option>
-                        <option value="">Lower B</option>
+                    <select name="" id="select_training" class="choices"
+                        oninput="showExercise('select_training', 'choices_exercise')">
+                        <option value="default" selected disabled>Escolha o treino</option>
+                        <option value="upperA">Upper A</option>
+                        <option value="upperB">Upper B</option>
+                        <option value="lowerA">Lower A</option>
+                        <option value="lowerB">Lower B</option>
                     </select>
                 </div>
-                <div class="content_choices">
+                <div class="content_choices choices_exercise" id="choices_exercise">
                     <h1>Escolha o exercício do treino</h1>
-                    <select name="" id="" class="choices">
+                    <select name="" id="select_exercise" class="choices"
+                        oninput="showExercise('select_exercise', 'content_button')">
+                        <option value="default" selected disabled>Escolha seu exercício</option>
                         <option value="">Supino</option>
                         <option value="">Pulley</option>
                         <option value="">Biceps</option>
                     </select>
                 </div>
-                <div class="content_button">
-                    <button class="button">Enviar exercícios</button>
+                <div class="content_button" id="content_button">
+                    <button class="button" onclick="showDashTraining()">Enviar exercícios</button>
                 </div>
             </section>
         </article>
-        <article class="kpi_container">
-            <div class="kpi">
-                <p>Progrediu repetição</p>
-                <p class="kpi-highlight" style="color: green;"><span id="kpi-day" class="kpi-highlight"
-                        style="color: green;">1</span> epetição</p>
-                <p class="kpi-base">Em comparação com o último treino</p>
-            </div>
-            <div class="kpi">
-                <p>Progrediu carga</p>
-                <p class="kpi-highlight kpi-highlight-often" id="kpi-often">0kg carga</p>
-                <p class="kpi-base">Em comparação com o último treino</p>
-            </div>
-        </article>
-        <article class="container_graph">
-            <h1>Comparação de carga</h1>
-            <canvas class="graph"></canvas>
-        </article>
-        <article class="container_graph">
-            <h1>Comparação de repetições</h1>
-            <canvas class="graph"></canvas>
-        </article>
+        <div id="display_dash">
+            <article class="kpi_container">
+                <div class="kpi">
+                    <p>Progrediu repetição</p>
+                    <p class="kpi-highlight"><span id="kpi-day" class="kpi-highlight">1</span> repetição</p>
+                    <p class="kpi-base">Em comparação com o último treino</p>
+                </div>
+                <div class="kpi">
+                    <p>Progrediu carga</p>
+                    <p class="kpi-highlight kpi-highlight-often" id="kpi-often">0kg carga</p>
+                    <p class="kpi-base">Em comparação com o último treino</p>
+                </div>
+            </article>
+            <article class="container_graph_training">
+                <article class="box_graph_training">
+                    <h1>Comparação de carga</h1>
+                    <canvas class="graph"></canvas>
+                </article>
+                <article class="box_graph_training">
+                    <h1>Comparação de repetições</h1>
+                    <canvas class="graph"></canvas>
+                </article>
+            </article>
+        </div>
     </main>
 </body>
 
 </html>
+
+<script src="../js/animation.js"></script>
+
+<script>
+    let nome = sessionStorage.NOME_USUARIO
+
+    // Maiuscula
+    // for (let i = 0; i < array.length; i++) {
+    //     const element = array[i];
+
+    // }
+
+    user_name.innerHTML = nome.toUpperCase()
+</script>

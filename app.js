@@ -19,7 +19,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 // var userExercise = require("./src/routes/userExercise");
-// var treinoRouter = require("./src/routes/treinos");
+var treinoRouter = require("./src/routes/treinos");
+var muscleRouter = require("./src/routes/muscleGroup")
 // var exerciseRouter = require("./src/routes/exercise");
 
 app.use(express.json());
@@ -32,7 +33,8 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 // app.use("/medidas", userExercise);
-// app.use("/aquarios", treinoRouter);
+app.use("/treinos", treinoRouter);
+app.use("/muscle", muscleRouter)
 // app.use("/empresas", exerciseRouter);
 
 app.listen(PORTA_APP, function () {

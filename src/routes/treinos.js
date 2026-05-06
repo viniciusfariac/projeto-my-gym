@@ -1,14 +1,15 @@
-// var express = require("express");
-// var router = express.Router();
+var express = require("express");
+var router = express.Router();
 
-// var treinoController = require("../controllers/treinoController");
+var treinoController = require("../controllers/treinoController");
 
-// router.get("/:empresaId", function (req, res) {
-//   treinoController.buscarTreinoPorUsuario(req, res);
-// });
 
-// router.post("/cadastrar", function (req, res) {
-//   treinoController.cadastrar(req, res);
-// })
+router.get("/:empresaId", function (req, res) {
+  treinoController.buscarTreinoPorUsuario(req, res);
+});
 
-// module.exports = router;
+router.post("/cadastrar", function (req, res) {
+  treinoController.cadastrarTreino(req, res);
+})
+
+module.exports = router;

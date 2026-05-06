@@ -16,15 +16,17 @@ function showPass(ipt_pass, ipt_confirm) {
 function toggleSelectButton(type) {
     let day = document.getElementById(type)
 
-    if (day.classList.contains("selected")) {
-        day.classList.remove("selected")
-        let index = listDay.indexOf(type)
-        listDay.splice(index, 1)
-    } else {
-        day.classList.add("selected")
-        listDay.push(type)
+    let selected = document.querySelectorAll('.selected')
 
+    if (selected.length > 0) {
+        selected[0].classList.remove('selected')
+        listDay = ''
     }
+
+    if (!day.classList.contains("selected")) {
+        day.classList.add('selected')
+        listDay = type
+    } 
     checkSecondCircle()
 }
 
@@ -64,6 +66,7 @@ function checkSecondCircle() {
 function addOneMore() {
     let box = document.getElementById("box_exercise")
     let cards = document.querySelectorAll("#card_exercise")
+    console.log(muscle_group)
     let len = cards.length
     box.insertAdjacentHTML('beforeend', `
                        <div class="card_exercise" id="card_exercise">
@@ -108,6 +111,9 @@ function addOneMore() {
 function removeOneMore() {
     let box = document.getElementById("box_exercise")
     let cards = document.querySelectorAll("#card_exercise")
+    if (cards.length === 1) {
+        return
+    }
     let card = cards[cards.length - 1]
     card.remove()
     checkThirdCircle()
@@ -134,5 +140,34 @@ function checkThirdCircle() {
         step.classList.remove("completed")
         step.classList.add("active")
         circle.innerHTML = "3"
+    }
+}
+
+function showExercise(choice, className) {
+    let select_training = document.getElementById(choice)
+    let choice_class = document.getElementById(className)
+    if (select_training.value != "default") {
+        choice_class.style.display = 'flex'
+    } else {
+        choice_class.style.display = 'none'
+    }
+}
+
+function showDashTraining() {
+    let display_dash = document.getElementById("display_dash")
+    display_dash.style.display = 'block'
+}
+
+function showMuscle() {
+    let select_muscle = document.getElementById("select_muscle_group")
+
+    for (let i = 0; i < muscle_group.length; i++) {
+        const muscle = muscle_group[i];
+        const name_group = muscle['name_group']
+        const id_muscle = muscle['id_muscle']
+        
+        select_muscle.insertAdjacentHTML("beforeend", 
+            `<option value="${id_muscle}">${name_group}</option>`
+        )
     }
 }

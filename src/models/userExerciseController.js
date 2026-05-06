@@ -29,7 +29,14 @@ function buscarUsuariosPorExercicio(idAquario) {
     return database.executar(instrucaoSql);
 }
 
+function cadastrarExercisioNoTreino(training_id, exercise_id, set_exercise) {
+    
+    var instrucaoSql = `
+    INSERT INTO  training_exercise(exercise_id, training_id, set_exercise)  VALUES (${exercise_id}, ${training_id}, ${set_exercise})`
+}
+
 module.exports = {
     buscarUltimosExercicios,
-    buscarUsuariosPorExercicio
+    buscarUsuariosPorExercicio,
+    cadastrarExercisioNoTreino
 }

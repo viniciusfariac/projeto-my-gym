@@ -51,12 +51,13 @@
             <nav class="nav_container">
                 <ul class="list_nav">
                     <li class="item_list"><a href="register_training.html">Cadastrar treino</a></li>
-                    </div>
                 </ul>
-            </nav>
+        </div>
+
+        </nav>
         </div>
         <div class="aside_footer">
-            <p class="user_name">Usuário: <span id="user_name">Vinicius Faria</span></p>
+            <p class="user_name">Usuário: <span id="user_name"></span></p>
         </div>
     </aside>
 
@@ -79,12 +80,21 @@
             </div>
         </article>
         <article class="container_graph">
-            <h1>Frequência no mês</h1>
-            <canvas class="graph"></canvas>
+
+            <article class="box_graph">
+                <h1>Frequência na semana</h1>
+                <canvas class="graph"></canvas>
+            </article>
+            <article class="box_graph">
+                <h1>Frequência no mês</h1>
+                <canvas class="graph"></canvas>
+            </article>
         </article>
         <article class="container_graph">
-            <h1>Frequência na semana</h1>
-            <canvas class="graph"></canvas>
+            <article class="box_graph">
+                <h1>Comparação entre as semanas</h1>
+                <canvas class="graph"></canvas>
+            </article>
         </article>
     </main>
 </body>
@@ -92,19 +102,13 @@
 </html>
 
 <script>
-    let miss_day = 1
+    let nome = sessionStorage.NOME_USUARIO
 
-    let miss_training = 1
+    // Maiuscula
+    // for (let i = 0; i < array.length; i++) {
+    //     const element = array[i];
+        
+    // }
 
-    let miss_name = 'Upper A'
-
-    kpi_day.innerHTML = `${miss_day} hora`
-
-    if (miss_day <= 0) {
-        kpi_day.style.color = "green"
-    } else if (miss_day >= 4) {
-        kpi_day.style.color = "yellow"
-    } else {
-        kpi_day.style.color = "red"
-    }
+    user_name.innerHTML = nome.toUpperCase()
 </script>

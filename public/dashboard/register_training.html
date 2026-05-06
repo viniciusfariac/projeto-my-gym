@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
-<body>
+<body onload="listar()">
     <aside class="aside">
         <div class="aside_header">
             <img src="../assets/logo_mygym.png" alt="Logo My Gym" title="Logo My Gym">
@@ -56,7 +56,7 @@
         </nav>
         </div>
         <div class="aside_footer">
-            <p class="user_name">Usuário: <span id="user_name">Vinicius Faria</span></p>
+            <p class="user_name">Usuário: <span id="user_name"></span></p>
         </div>
     </aside>
 
@@ -100,7 +100,7 @@
                 <div class="container_days">
                     <p>Dias da semana</p>
                     <div class="content_days">
-                        <div class="">
+                        <div class="form_content">
                             <button class="day_btn" id="seg" onclick="toggleSelectButton('seg')">Seg</button>
                         </div>
                         <div class="form_content">
@@ -137,24 +137,15 @@
                             <div class="container_choices">
                                 <div class="choice_group">
                                     <span>Grupo muscular</span>
-                                    <select id="">
-                                        <option value="">Peito</option>
-                                        <option value="">Ombro</option>
-                                        <option value="">Triceps</option>
-                                        <option value="">Quadriceps</option>
-                                        <option value="">Glúteos</option>
-                                        <option value="">Costas</option>
-                                        <option value="">Bíceps</option>
-                                        <option value="">Antebraço</option>
-                                        <option value="">Panturrilha</option>
-                                        <option value="">Adbomên</option>
+                                    <select id="select_muscle_group">
+
                                     </select>
                                 </div>
                                 <div class="choice_group">
                                     <span>Exercício</span>
-                                    <select id="">
-                                        <option value="">Supino</option>
-                                        <option value="">Pulley</option>
+                                    <select id="select_exercise">
+                                        <option value="Supino">Supino</option>
+                                        <option value="Pulley">Pulley</option>
                                     </select>
                                 </div>
                             </div>
@@ -171,7 +162,10 @@
                 </div>
 
                 <div class="container_submit">
-                    <button class="button_register">Cadastrar treino</button>
+                    <button class="button_register" onclick="registerTraining()">Cadastrar treino</button>
+                </div>
+                <div class="container_message_text">
+                    <p class="message_text" id="message_text"></p>
                 </div>
             </div>
         </article>
@@ -180,7 +174,21 @@
 
 </html>
 <script src="../js/animation.js"></script>
+<script src="../js/send_data.js"></script>
+<script src="../js/receive_data.js"></script>
 
 <script>
-    let listDay = []
+    let listDay = ''
+    let nome = sessionStorage.NOME_USUARIO
+    let muscle_group = []
+
+    // Maiuscula
+    // for (let i = 0; i < array.length; i++) {
+    //     const element = array[i];
+
+    // }
+
+    user_name.innerHTML = nome.toUpperCase()
+
+    showMuscle()
 </script>

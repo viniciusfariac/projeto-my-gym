@@ -9,7 +9,7 @@ function validating_name(name) {
 function validating_mail(mail) {
     let arroba = mail.indexOf('@')
     let ponto = mail.lastIndexOf('.')
-    
+
     // Validação se tem arroba e ponto + validação se posição do ponto é maior que arroba
     if (arroba > 0 && ponto > 0 && ponto > arroba) {
         return false
@@ -57,7 +57,7 @@ function validating_pass(pass) {
 function validating_blank_field(name, mail, pass, confirm_pass) {
     // Validando se tem algum campo em branco
     if (name == "" || mail == "" || pass == "" || confirm_pass == "") {
-        
+
         return true
     }
     return false
