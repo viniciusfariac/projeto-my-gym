@@ -23,155 +23,119 @@ function validating_week_day(day) {
     }
 }
 
-function registerTraining() {
+
+
+async function validatingRegisterTrainingExercise() {
     let name = input_name.value
     let type = input_type.value
     let day = validating_week_day(listDay)
     let message_text = document.getElementById("message_text")
 
-    if (!name || !type || listDay.length <= 0) {
-        console.log("AAA")
+    let selects_exercises = document.querySelectorAll("#select_exercise")
+    let sets = document.querySelectorAll("#ipt_exercise")
+    
+    let validate = false
+    for (let i = 0; i < selects_exercises.length && i < sets.length; i++) {
+        const exercise = selects_exercises[i].value;
+        const set = sets[i].value
+
+        if (exercise == 'default' || set <= 0) {
+            validate = true
+        }
+
+    }
+
+    console.log(validate, 'A')
+
+    if (!name || !type || listDay.length <= 0 || validate) {
         message_text.style.color = "#DC2626"
         message_text.innerHTML = "Preencha todos os campos"
-        message_text.style.display = "Block"
+        message_text.style.opacity = "1"
+        message_text.style.transform = "translateX(0)"
         return
     }
 
+    console.log(name, type, day)
+    let id_training = await registerTraining(name, type, day)
 
+    if (typeof id_training != "number") {
+        console.log(id_training)
+        message_text.style.color = "#DC2626"
+        message_text.innerHTML = "Treino não encontado"
+        message_text.style.opacity = "1"
+        message_text.style.transform = "translateX(0)"
+        return
+    }
+
+    for (let i = 0; i < selects_exercises.length && i < sets.length; i++) {
+        const exercise = selects_exercises[i].value;
+        const set = sets[i].value
+
+        console.log(exercise, set)
+
+        let id_exercise = await registerExercise(id_training, exercise, set)
+
+        console.log(id_exercise)
+
+        if (typeof id_exercise != "number") {
+            console.log(id_exercise)
+            message_text.style.color = "#DC2626"
+            message_text.innerHTML = "Exercicio não encontrado"
+            message_text.style.opacity = "1"
+            message_text.style.transform = "translateX(0)"
+            return
+        }
+    }
+
+    message_text.style.opacity = "1"
+    message_text.style.transform = "translateX(0)"
     message_text.style.color = "#16A34A"
-    message_text.innerHTML = "Treino cadastrado"
-    message_text.style.display = "Block"
+    message_text.innerHTML = "Treino cadastrado com sucesso"
 
-    fetch("/treinos/cadastrar", {
+}
+
+async function registerTraining(name, type, day) {
+    console.log(name, type, day)
+    let response = await fetch("/treinos/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
             idServer: sessionStorage.ID_USUARIO,
             nomeServer: name,
             typeServer: type,
             dayServer: day
         }),
     })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
+    let json_training = await response.json()
 
-            if (resposta.ok) {
-                div_response.style.display = "none";
+    if (!json_training.resultado) {
+        return false
+    }
 
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000");
-
-                limparFormulario();
-                finalizarAguardar();
-            } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
-    registerExercise()
+    return json_training.insertId
 }
+async function registerExercise(id_training, id_exercise, set) {
 
-function registerExercise() {
-
-}
-
-
-function makeLogin() {
-    // Declarando as variáveis
-    let full_name = ipt_name.value
-    let mail = ipt_mail.value
-    let pass = ipt_pass.value
-    let confirm_pass = ipt_confirm_pass.value
-
-    // Verificação de campos em branco
-    if (validating_blank_field(full_name, mail, pass, confirm_pass)) {
-        div_response.style.display = "block"
-        error_response.innerHTML = "Todos os campos precisam estar preenchidos"
-        return false
-    }
-
-    // Verificação de nome para até 3 caracteres
-    if (validating_name(full_name)) {
-        div_response.style.display = "block"
-        error_response.innerHTML = "O campo nome deve ter pelo menos 3 caracteres"
-        return false
-    }
-
-    // Validação de estrutura de email, com ponto e arroba
-    if (validating_mail(mail)) {
-        div_response.style.display = "block"
-        error_response.innerHTML = "Digite uma estrutura de email válida"
-        return false
-    }
-
-    // Validação de senha
-    if (validating_pass(pass)) {
-        div_response.style.display = "block"
-        error_response.innerHTML = "Senha precisa ter: 8 caracteres, numeros, letra maiúscula, letra minúscula, caracter especial e não pode repetir caracter junto"
-        return false
-    }
-
-    // Conferindo se as senhas coincidem
-    if (validating_confirm_pass(pass, confirm_pass)) {
-        div_response.style.display = "block"
-        error_response.innerHTML = "As senhas precisam coincidir"
-        return false
-    }
-
-    // Validando se a senha não tem o nome do usuário
-    let pass_name = validating_pass_name(pass, full_name)
-    if (pass_name.length > 0) {
-        div_response.style.display = "block"
-        error_response.innerHTML = `A senha não pode ter parte do seu nome, como por exemplo: ${pass_name}`
-        return false
-    }
-
-    // Aplicando display none se tudo estiver correto
-    div_response.style.display = "none"
-
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    let response = await fetch("/user/exercise/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            nomeServer: full_name,
-            emailServer: mail,
-            senhaServer: pass
+            idTrainingServer: id_training,
+            idExerciseServer: id_exercise,
+            setServer: set
         }),
     })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
+    let json_exercise = await response.json()
 
-            if (resposta.ok) {
-                div_response.style.display = "none";
+    if (!json_exercise.resultado) {
+        return false
+    }
 
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000");
+    return json_exercise.insertId
 
-                limparFormulario();
-                finalizarAguardar();
-            } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
-    return false;
 }
+

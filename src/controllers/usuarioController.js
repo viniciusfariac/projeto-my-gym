@@ -83,7 +83,7 @@ function cadastrar(req, res) {
                         "\nHouve um erro ao realizar o cadastro! Erro: ",
                         erro.sqlMessage
                     );
-                    res.status(500).json(erro.sqlMessage);
+                   res.status(500).json(erro.sqlMessage);
                 }
             );
     }

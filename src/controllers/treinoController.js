@@ -18,6 +18,16 @@ function cadastrarTreino(req, res) {
         res.status(400).send("O id do usuário está undefined")
     } else {
         treinoModel.cadastrarTreino(id_usuario, nome, day, type)
+            .then(function (resultadoCadastro) {
+                res.status(200).json({
+                    insertId: resultadoCadastro.insertId,
+                    resultado: true
+                }) 
+            })
+            .catch((erro) => {
+                console.log(erro)
+                res.status(500).json(erro.sqlMessage);
+            })
     }
 
 }

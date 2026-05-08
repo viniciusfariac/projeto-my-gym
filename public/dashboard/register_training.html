@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
-<body onload="listar()">
+<body onload="loadData()">
     <aside class="aside">
         <div class="aside_header">
             <img src="../assets/logo_mygym.png" alt="Logo My Gym" title="Logo My Gym">
@@ -129,32 +129,6 @@
                     <p>Exercícios do treino</p>
                 </div>
                 <div class="box_exercise" id="box_exercise">
-                    <div class="card_exercise" id="card_exercise">
-                        <div class="title_exercise">
-                            <p id="title_exercise">Exercício 1</p>
-                        </div>
-                        <div class="content_exercise">
-                            <div class="container_choices">
-                                <div class="choice_group">
-                                    <span>Grupo muscular</span>
-                                    <select id="select_muscle_group">
-
-                                    </select>
-                                </div>
-                                <div class="choice_group">
-                                    <span>Exercício</span>
-                                    <select id="select_exercise">
-                                        <option value="Supino">Supino</option>
-                                        <option value="Pulley">Pulley</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="choice_set">
-                                <p>Séries para esse exercício</p>
-                                <input type="number" id="ipt_exercise1" oninput="checkThirdCircle()">
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="container_button">
                     <button class="button" onclick="addOneMore()">Adicionar mais um exercício</button>
@@ -162,10 +136,10 @@
                 </div>
 
                 <div class="container_submit">
-                    <button class="button_register" onclick="registerTraining()">Cadastrar treino</button>
+                    <button class="button_register" onclick="validatingRegisterTrainingExercise()">Cadastrar treino</button>
                 </div>
                 <div class="container_message_text">
-                    <p class="message_text" id="message_text"></p>
+                    <p class="message_text" id="message_text">AAA</p>
                 </div>
             </div>
         </article>
@@ -175,12 +149,12 @@
 </html>
 <script src="../js/animation.js"></script>
 <script src="../js/send_data.js"></script>
-<script src="../js/receive_data.js"></script>
 
 <script>
     let listDay = ''
     let nome = sessionStorage.NOME_USUARIO
     let muscle_group = []
+    let all_exercise = []
 
     // Maiuscula
     // for (let i = 0; i < array.length; i++) {
@@ -189,6 +163,4 @@
     // }
 
     user_name.innerHTML = nome.toUpperCase()
-
-    showMuscle()
 </script>

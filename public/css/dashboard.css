@@ -615,7 +615,9 @@ select {
 }
 
 .message_text {
-    display: none;
+    transition: 0.5s;
+    transform: translateX(-1000px);
+    opacity: 0;
     font-weight: bold;
 }
 
