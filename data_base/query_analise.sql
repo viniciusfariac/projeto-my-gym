@@ -1,5 +1,6 @@
 USE my_gym;
 
+SELECT * FROM user;
 -- SELECTS TESTES
 
 SELECT
@@ -78,7 +79,10 @@ FROM training_log tr
 JOIN training_exercise te ON te.id_training_exercise = tr.training_exercise_id
 JOIN training t ON t.id_training = te.training_id
 JOIN user u ON u.id_user = t.user_id
-WHERE u.username = 'vinicius'
+WHERE 
+	u.username = 'vinicius'
+AND
+	MONTH(tr.training_date) = MONTH(current_timestamp())
 GROUP BY mes, ano
 ORDER BY mes, ano;
 
@@ -105,7 +109,7 @@ JOIN user u ON u.id_user = t.user_id
 WHERE 
 	u.username = 'vinicius'
 AND
-	MONTH(tr.training_date) = 4
+	MONTH(tr.training_date) = 5
 GROUP BY dia_semana
 ORDER BY frequencia DESC;
 
@@ -197,3 +201,19 @@ AND
 AND 
 	e.exercise_name = 'Supino inclinado com halteres'
 GROUP BY DATE(tr.training_date);
+
+
+SELECT 
+	COUNT(DISTINCT DATE(tr.training_date)) frequencia,
+	HOUR(tr.training_date) horario
+FROM training_log tr
+JOIN training_exercise te ON te.id_training_exercise = tr.training_exercise_id
+JOIN training t ON t.id_training = te.training_id
+JOIN user u ON u.id_user = t.user_id
+WHERE 
+	u.username = 'vinicius'
+AND
+	MONTH(tr.training_date) = MONTH(current_timestamp())
+GROUP BY HOUR(tr.training_date)
+ORDER BY frequencia DESC
+LIMIT 1;

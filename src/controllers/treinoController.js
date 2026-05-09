@@ -22,7 +22,7 @@ function cadastrarTreino(req, res) {
                 res.status(200).json({
                     insertId: resultadoCadastro.insertId,
                     resultado: true
-                }) 
+                })
             })
             .catch((erro) => {
                 console.log(erro)
@@ -32,6 +32,62 @@ function cadastrarTreino(req, res) {
 
 }
 
+function frequenciaNoMes(req, res) {
+    var id_user = req.params.idUser
+
+    if (id_user == undefined) {
+        res.status(400).send("O id do usuário está undefined");
+    } else {
+        treinoModel.frequenciaNoMes(id_user)
+            .then(function (resultado) {
+                res.status(200).json(resultado)
+            })
+            .catch((erro) => {
+                console.log(erro)
+                res.status(500).json(erro.sqlMessage)
+            })
+    }
+}
+
+function horarioFrequente(req, res) {
+    var id_user = req.params.idUser
+
+
+    if (id_user == undefined) {
+        res.status(400).send("O id do usuário está undefined!");
+    } else {
+        treinoModel.horarioFrequente(id_user)
+            .then(function (resultado) {
+                res.status(200).json(resultado)
+            })
+            .catch((erro) => {
+                console.log(erro)
+                res.status(500).json(erro.sqlMessage)
+            })
+    }
+}
+
+function metaMensal(req, res) {
+    var id_user = req.params.idUser
+
+    if (id_user == undefined) {
+        res.status(400).send("O id do usuário está undefined!");
+    } else {
+        treinoModel.metaMensal(id_user)
+            .then(function (resultado) {
+                res.status(200).json(resultado)
+            })
+            .catch((erro) => {
+                console.log(erro)
+                res.status(500).json(erro.sqlMessage)
+            })
+    }
+}
+
+
 module.exports = {
-    cadastrarTreino
+    cadastrarTreino,
+    frequenciaNoMes,
+    horarioFrequente,
+    metaMensal
 }

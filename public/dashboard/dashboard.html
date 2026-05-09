@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
-<body>
+<body onload="initDash()">
     <aside class="aside">
         <div class="aside_header">
             <img src="../assets/logo_mygym.png" alt="Logo My Gym" title="Logo My Gym">
@@ -64,19 +64,19 @@
     <main>
         <article class="kpi_container">
             <div class="kpi">
-                <p>Você faltou</p>
-                <p class="kpi-highlight"><span id="kpi_day" class="kpi-highlight">1</span> dia(s) na academia</p>
+                <p>Você Treinou</p>
+                <p class="kpi-highlight"><span id="kpi_day" class="kpi-highlight"></span>x esse mês</p>
                 <p class="kpi-base">Com base nos últimos 30 dias</p>
             </div>
             <div class="kpi">
                 <p>Seu horário mais frequente</p>
-                <p class="kpi-highlight kpi-highlight-often" id="kpi_often">16 horas</p>
+                <p class="kpi-highlight kpi-highlight-often"><span id="kpi_often" class="kpi-highlight kpi-highlight-often"></span> horas</p>
                 <p class="kpi-base">Com base nos últimos 30 dias</p>
             </div>
             <div class="kpi">
-                <p>Você perdeu </p>
-                <p class="kpi-highlight"><span id="kpi-day" class="kpi-highlight">1 treino de upper A</span></p>
-                <p class="kpi-base">Com base nos últimos 30 dias</p>
+                <p>Sua meta mensal</p>
+                <p class="kpi-highlight">Voce precisa treinar <span id="kpi_goal_month" class="kpi-highlight"></span><span class="kpi-highlight">x</span></p>
+                <p class="kpi-base">Seu progresso atual <span id="kpi_goal_progress"></span></p>
             </div>
         </article>
         <article class="container_graph">
@@ -100,6 +100,8 @@
 </body>
 
 </html>
+
+<script src="../js/send_data.js"></script>
 
 <script>
     let nome = sessionStorage.NOME_USUARIO

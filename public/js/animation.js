@@ -161,6 +161,12 @@ function showDashExercise(choice, className) {
     let choice_class = document.getElementById(className)
     if (select_training.value != "default") {
         choice_class.style.display = 'flex'
+
+        setTimeout(() => {
+            choice_class.style.opacity = "1";
+            choice_class.style.transform = "translateX(0)";
+            choice_class.style.transform = "translateY(0)";
+        }, 10)
     } else {
         choice_class.style.display = 'none'
     }
@@ -168,7 +174,10 @@ function showDashExercise(choice, className) {
 
 function showDashTraining() {
     let display_dash = document.getElementById("display_dash")
-    display_dash.style.display = 'block'
+    display_dash.style.display = "block"
+    setTimeout(() => {
+        display_dash.style.opacity = "1";
+    }, 10)
 }
 
 async function searchMuscle() {

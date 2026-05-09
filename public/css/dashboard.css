@@ -89,6 +89,8 @@ main {
 
 /* Tela da dashboard principal */
 #display_dash {
+    opacity: 0;
+    transition: all 1s ease;
     display: none;
 }
 
@@ -120,11 +122,7 @@ main {
 .kpi-highlight {
     font-size: 1.1rem;
     font-weight: bold;
-    color: var(--kpi-red);
-}
-
-.kpi-highlight-often {
-    color: var(--kpi-green);
+    color: var(--highlight-color);
 }
 
 /* Texto da parte do tempo da kpi */
@@ -280,6 +278,7 @@ input[type="number"] {
     background-color: var(--bg-fourth);
     padding: 2rem;
     border-radius: 16px;
+    overflow: hidden;
 }
 
 /* Estilização para conteúdo
@@ -316,10 +315,16 @@ select e h1 */
 }
 
 .choices_exercise {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: 1s;
     display: none;
 }
 
 .content_button {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: 1s;
     display: none;
 }
 

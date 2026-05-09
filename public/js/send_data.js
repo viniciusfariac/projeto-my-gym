@@ -1,3 +1,5 @@
+const { get } = require("../../src/routes")
+
 function validating_week_day(day) {
     if (day == 'seg') {
         return "Segunda"
@@ -33,7 +35,7 @@ async function validatingRegisterTrainingExercise() {
 
     let selects_exercises = document.querySelectorAll("#select_exercise")
     let sets = document.querySelectorAll("#ipt_exercise")
-    
+
     let validate = false
     for (let i = 0; i < selects_exercises.length && i < sets.length; i++) {
         const exercise = selects_exercises[i].value;
@@ -137,5 +139,89 @@ async function registerExercise(id_training, id_exercise, set) {
 
     return json_exercise.insertId
 
+}
+
+async function showFrequencyDay() {
+    let response = await fetch(`/treinos/frequencia-mes/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+
+    console.log("AA")
+
+    let json = await response.json()
+
+    if (json.length <= 0) {
+        console.log("ERRO")
+        return false
+    }
+
+    console.log(json)
+
+    if (!json[0].frequencia) {
+        return kpi_day.innerHTML = "Sem treinos cadastrados"
+    }
+    kpi_day.innerHTML = json[0].frequencia
+}
+
+async function showFrequencyHour() {
+    let response = await fetch(`/treinos/frequencia-horario/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+
+    console.log("AA")
+
+    let json = await response.json()
+
+    if (json.length <= 0) {
+        console.log("ERRO")
+        return false
+    }
+
+    console.log(json)
+
+    if (!json[0].horario) {
+        return kpi_often.innerHTML = "Sem treinos cadastrados"
+    }
+
+    kpi_often.innerHTML = json[0].horario
+}
+
+async function showGoal() {
+    let response = await fetch(`/treinos/frequencia-meta/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+
+    console.log("AA")
+
+    let json = await response.json()
+
+    if (json.length <= 0) {
+        console.log("ERRO")
+        return false
+    }
+
+    console.log(json)
+
+    if (!json[0].meta_mensal || !json[0].dias_treinados || !json[0].progresso) {
+        return kpi_trained_day.innerHTML = "Sem treinos cadastrados"
+    }
+
+    kpi_goal_month.innerHTML = json[0].meta_mensal
+    kpi_goal_progress.innerHTML = json[0].progresso
+}
+
+async function initDash() {
+    await showFrequencyDay()
+    await showFrequencyHour()
+    await showGoal()
 }
 
