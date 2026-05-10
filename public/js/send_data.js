@@ -170,16 +170,12 @@ async function showFrequencyHour() {
         }
     })
 
-    console.log("AA")
-
     let json = await response.json()
 
     if (json.length <= 0) {
         console.log("ERRO")
         return false
     }
-
-    console.log(json)
 
     if (!json[0].horario) {
         return kpi_often.innerHTML = "Sem treinos cadastrados"
@@ -196,7 +192,6 @@ async function showGoal() {
         }
     })
 
-    console.log("AA")
 
     let json = await response.json()
 
@@ -205,7 +200,6 @@ async function showGoal() {
         return false
     }
 
-    console.log(json)
 
     if (!json[0].meta_mensal || !json[0].dias_treinados || !json[0].progresso) {
         return kpi_trained_day.innerHTML = "Sem treinos cadastrados"
@@ -215,20 +209,13 @@ async function showGoal() {
     kpi_goal_progress.innerHTML = json[0].progresso
 }
 
-async function initDash() {
-    await showFrequencyDay()
-    await showFrequencyHour()
-    await showGoal()
-    await showListTraining()
-}
-
 async function searchUserTraining() {
     let response = await fetch(`/treinos/listar/${sessionStorage.ID_USUARIO}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
         }
+    }
     )
 
     let json = await response.json()
@@ -240,7 +227,7 @@ async function searchTrainingExercise(id_training) {
     let response = await fetch(`/user/exercise/listar/${id_training}`)
 
     let json = await response.json()
-    
+
     return json
 }
 
@@ -284,7 +271,119 @@ async function showTrainingExercise() {
     })
 }
 
+async function searchProgressionWeight(id_training, id_exercise, id_user) {
+    let response = await fetch(`/treinos/progressao-carga/${id_user}/${id_training}/${id_exercise}`)
+
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+async function showGraphWeight() {
+    let select_training = document.getElementById("select_training")
+    let select_exercise = document.getElementById("select_exercise")
+
+    let id_training = select_training.value
+    let id_exercise = select_exercise.value
+    let id_user = sessionStorage.ID_USUARIO
+
+    let json = await searchProgressionWeight(id_training, id_exercise, id_user)
+
+    let grouped_weight = []
+    let datasets = []
+    let labels_lines = []
+
+    json.forEach((value) => {
+        let training_date = value.training_date
+        let date = new Date(training_date)
+        let month = date.getMonth() + 1
+
+        let month_exist = false
+        let index = -1
+
+        for (let i = 0; i < grouped_weight.length; i++) {
+            const element = grouped_weight[i];
+
+            if (element.month == month) {
+                month_exist = true
+                index = i
+                break
+            }
+        }
+
+        if (!month_exist) {
+            grouped_weight.push({
+                month: month,
+                weights: []
+            })
+            index = grouped_weight.length - 1
+        }
+
+        grouped_weight[index].weights.push(value.max_weight)
+    })
+
+    for (let i = 0; i < grouped_weight.length; i++) {
+        const element = grouped_weight[i];
+
+        let month = element.month
+        let weights = element.weights
+
+        datasets.push({
+            label: `Progressão mês ${month}`,
+            data: weights,
+            borderWidth: 2
+        })
+
+        labels_lines.push(`${i + 1} Série`)
+    }
+
+    console.log('datasets', datasets)
+    console.log(labels_lines)
+
+    let graph_weight = document.getElementById("graph_weight")
+
+    const data_linha = {
+        labels: labels_lines,
+        datasets
+    };
+
+    console.log(data_linha)
+
+    new Chart(graph_weight, {
+        type: 'line',
+        data: data_linha,
+
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function showDashTraining() {
+    let display_dash = document.getElementById("display_dash")
+    display_dash.style.display = "block"
+    setTimeout(() => {
+        display_dash.style.opacity = "1";
+    }, 10)
+
+    showGraphWeight()
+}
+
 async function initDashTraining() {
     await showUserTraining()
     await showListTraining()
 }
+
+async function initDash() {
+    await showFrequencyDay()
+    await showFrequencyHour()
+    await showGoal()
+    await showListTraining()
+}
+

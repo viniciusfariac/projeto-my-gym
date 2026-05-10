@@ -117,45 +117,9 @@
     user_name.innerHTML = nome.toUpperCase()
 
 
-    function showDashTraining() {
-        let display_dash = document.getElementById("display_dash")
-        display_dash.style.display = "block"
-        setTimeout(() => {
-            display_dash.style.opacity = "1";
-        }, 10)
-    }
 
-    let graph_weight = document.getElementById("graph_weight")
 
-    const labels_linha = ['1', '2', '3', '4'];
 
-    const data_linha = {
-        labels: labels_linha,
-        datasets: [{
-            label: 'Progressão mês 1',
-            data: [30, 29, 28, 25],
-            borderWidth: 2
-        },
-        {
-            label: 'Progressão mês 2',
-            data: [32, 45, 46, 49],
-            borderWidth: 2
-        }
-        ]
-    };
-
-    new Chart(graph_weight, {
-        type: 'line',
-        data: data_linha,
-
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 
 
 </script>

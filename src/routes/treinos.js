@@ -29,4 +29,8 @@ router.get("/listar/:idUser", function (req, res) {
   treinoController.buscarTreinoPorUsuario(req, res)
 })
 
+router.get("/progressao-carga/:idUser/:idTraining/:idExercise", function (req, res) {
+  treinoController.graficoEvolucaoCarga(req, res)
+})
+
 module.exports = router;
