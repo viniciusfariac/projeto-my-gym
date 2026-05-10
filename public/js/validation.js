@@ -87,3 +87,4 @@ function validating_pass_name(pass, full_name) {
     // Retorna qtd sem nada ou com algum elemento
     return qtd
 }
+

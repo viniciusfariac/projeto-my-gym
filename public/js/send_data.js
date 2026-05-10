@@ -1,5 +1,3 @@
-const { get } = require("../../src/routes")
-
 function validating_week_day(day) {
     if (day == 'seg') {
         return "Segunda"
@@ -24,8 +22,6 @@ function validating_week_day(day) {
         return "Domingo"
     }
 }
-
-
 
 async function validatingRegisterTrainingExercise() {
     let name = input_name.value
@@ -223,5 +219,72 @@ async function initDash() {
     await showFrequencyDay()
     await showFrequencyHour()
     await showGoal()
+    await showListTraining()
 }
 
+async function searchUserTraining() {
+    let response = await fetch(`/treinos/listar/${sessionStorage.ID_USUARIO}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
+
+    let json = await response.json()
+
+    return json
+}
+
+async function searchTrainingExercise(id_training) {
+    let response = await fetch(`/user/exercise/listar/${id_training}`)
+
+    let json = await response.json()
+    
+    return json
+}
+
+async function showUserTraining() {
+    let json = await searchUserTraining()
+
+    let element_html = document.getElementById('select_training')
+    element_html.innerHTML = `<option value="default" selected disabled>Escolha o treino</option>`
+
+    json.forEach((training) => {
+        let name_training = training.name_training
+        let id_training = training.id_training
+        element_html.innerHTML += `<option value="${id_training}">${name_training}</option>`
+    })
+}
+
+async function showListTraining() {
+    let json = await searchUserTraining()
+    let element_html = document.getElementById('list_training')
+
+    json.forEach((training) => {
+        let name_training = training.name_training
+        let id_training = training.id_training
+        element_html.innerHTML += ` <li class="item_list"><a href=training_set.html?id=${id_training} id="id_${id_training}">${name_training}</a></li>`
+    })
+}
+
+async function showTrainingExercise() {
+    let select_training = document.getElementById("select_training")
+    let id_training = select_training.value
+    let select_exercise = document.getElementById("select_exercise")
+
+    let json_exercise = await searchTrainingExercise(id_training)
+    select_exercise.innerHTML = "<option value='default' selected disabled>Escolha um exercício</option>"
+
+    json_exercise.forEach((exercise) => {
+        let exercise_name = exercise.exercise_name
+        let id_exercise = exercise.id_exercise
+
+        select_exercise.innerHTML += `<option value="${id_exercise}">${exercise_name}</option>`
+    })
+}
+
+async function initDashTraining() {
+    await showUserTraining()
+    await showListTraining()
+}

@@ -15,4 +15,8 @@ router.post("/cadastrar", function (req, res) {
     userExerciseController.cadastrar(req, res)
 })
 
+router.get("/listar/:idTreino", function (req, res) {
+    userExerciseController.listarTreinoExercisioUsuario(req, res)    
+})
+
 module.exports = router;

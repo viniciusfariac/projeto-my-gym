@@ -38,6 +38,29 @@ function cadastrarExercisioNoTreino(training_id, exercise_id, set_exercise) {
     return database.executar(instrucaoSql);
 }
 
+function listarTreinoExercisioUsuario(training_id) {
+    var instrucaoSql = `
+    SELECT 
+	e.url_image,
+    e.exercise_name,
+    e.description,
+    e.id_exercise,
+    t.user_id,
+    t.name_training,
+    t.type_training,
+    te.set_exercise
+    FROM
+        training_exercise te
+    JOIN training t ON te.training_id = t.id_training
+    JOIN exercise e ON e.id_exercise = te.exercise_id
+    WHERE 
+        t.id_training = ${training_id}
+    `
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
-    cadastrarExercisioNoTreino
+    cadastrarExercisioNoTreino,
+    listarTreinoExercisioUsuario
 }

@@ -38,6 +38,23 @@ function cadastrar(req, res) {
     }
 }
 
+function listarTreinoExercisioUsuario(req, res) {
+    var id_treino = req.params.idTreino
+
+    if (id_treino == undefined) {
+        res.status(400).send("O id do treino está undefined!");
+    } else {
+        userExerciseModel.listarTreinoExercisioUsuario(id_treino)
+            .then(function (resultado) {
+                res.status(200).json(resultado)
+            })
+            .catch(function (error) {
+                res.status(500).json(error.sqlMessage)
+            })
+    }
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarTreinoExercisioUsuario
 }

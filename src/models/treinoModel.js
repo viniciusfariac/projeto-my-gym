@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarTreinoPorUsuario(user_id) {
 
-  var instrucaoSql = `SELECT * FROM training t WHERE user_id = ${user_id}`;
+  var instrucaoSql = `SELECT id_training, name_training FROM training t WHERE user_id = ${user_id} AND status = 'Ativo'`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

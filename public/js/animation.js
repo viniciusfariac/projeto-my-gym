@@ -1,6 +1,7 @@
 async function loadData() {
     await searchMuscle()
     await searchAllExercise()
+    await showListTraining()
     init()
 }
 
@@ -172,14 +173,6 @@ function showDashExercise(choice, className) {
     }
 }
 
-function showDashTraining() {
-    let display_dash = document.getElementById("display_dash")
-    display_dash.style.display = "block"
-    setTimeout(() => {
-        display_dash.style.opacity = "1";
-    }, 10)
-}
-
 async function searchMuscle() {
     let response = await fetch("/muscle/listar", {
         method: "GET",
@@ -255,3 +248,28 @@ async function showDinamicExercise(select, exercise) {
     }
 }
 
+
+async function showListTraining() {
+    let json = await searchUserTraining()
+    let element_html = document.getElementById('list_training')
+
+    json.forEach((training) => {
+        let name_training = training.name_training
+        let id_training = training.id_training
+        element_html.innerHTML += ` <li class="item_list"><a href=training_set.html?id=${id_training} id="id_${id_training}">${name_training}</a></li>`
+    })
+}
+
+async function searchUserTraining() {
+    let response = await fetch(`/treinos/listar/${sessionStorage.ID_USUARIO}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }
+    )
+
+    let json = await response.json()
+
+    return json
+}

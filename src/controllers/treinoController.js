@@ -84,10 +84,26 @@ function metaMensal(req, res) {
     }
 }
 
+function buscarTreinoPorUsuario(req, res) {
+    var id_user = req.params.idUser
+
+    if (id_user == undefined) {
+        res.status(400).send("O id do usuário está undefined!");
+    } else {
+        treinoModel.buscarTreinoPorUsuario(id_user)
+            .then(function (resultado) {
+                res.status(200).json(resultado)
+            })
+            .catch(function (error) {
+                res.status(500).json(error.sqlMessage)
+            })
+    }
+}
 
 module.exports = {
     cadastrarTreino,
     frequenciaNoMes,
     horarioFrequente,
-    metaMensal
+    metaMensal,
+    buscarTreinoPorUsuario
 }

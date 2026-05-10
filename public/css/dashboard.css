@@ -89,9 +89,9 @@ main {
 
 /* Tela da dashboard principal */
 #display_dash {
-    opacity: 0;
+    opacity: 1;
     transition: all 1s ease;
-    display: none;
+    display: block;
 }
 
 /* Container da kpi */

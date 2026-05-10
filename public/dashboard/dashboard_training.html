@@ -20,9 +20,11 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="initDashTraining()">
     <aside class="aside">
         <div class="aside_header">
             <img src="../assets/logo_mygym.png" alt="Logo My Gym" title="Logo My Gym">
@@ -40,11 +42,7 @@
             <nav class="nav_container">
                 <ul class="list_nav">
                     <li class="item_list">Treinos</li>
-                    <div class="list_ref">
-                        <li class="item_list"><a href="training_set.html" id="training_available">Upper A</a></li>
-                        <li class="item_list"><a href="training_set.html" id="training_available">Upper B</a></li>
-                        <li class="item_list"><a href="training_set.html" id="training_available">Lower A</a></li>
-                        <li class="item_list"><a href="training_set.html" id="training_available">Lower B</a></li>
+                    <div class="list_ref" id="list_training">
                     </div>
                 </ul>
             </nav>
@@ -66,12 +64,8 @@
                 <div class="content_choices">
                     <h1>Escolha seu treino</h1>
                     <select name="" id="select_training" class="choices"
-                        oninput="showDashExercise('select_training', 'choices_exercise')">
-                        <option value="default" selected disabled>Escolha o treino</option>
-                        <option value="upperA">Upper A</option>
-                        <option value="upperB">Upper B</option>
-                        <option value="lowerA">Lower A</option>
-                        <option value="lowerB">Lower B</option>
+                        oninput="showDashExercise('select_training', 'choices_exercise')"
+                        onchange="showTrainingExercise()">
                     </select>
                 </div>
                 <div class="content_choices choices_exercise" id="choices_exercise">
@@ -79,9 +73,6 @@
                     <select name="" id="select_exercise" class="choices"
                         oninput="showDashExercise('select_exercise', 'content_button')">
                         <option value="default" selected disabled>Escolha seu exercício</option>
-                        <option value="">Supino</option>
-                        <option value="">Pulley</option>
-                        <option value="">Biceps</option>
                     </select>
                 </div>
                 <div class="content_button" id="content_button">
@@ -105,11 +96,11 @@
             <article class="container_graph_training">
                 <article class="box_graph_training">
                     <h1>Comparação de carga</h1>
-                    <canvas class="graph"></canvas>
+                    <canvas class="graph" id="graph_weight"></canvas>
                 </article>
                 <article class="box_graph_training">
                     <h1>Comparação de repetições</h1>
-                    <canvas class="graph"></canvas>
+                    <canvas class="graph" id="graph_weight"></canvas>
                 </article>
             </article>
         </div>
@@ -119,15 +110,52 @@
 </html>
 
 <script src="../js/animation.js"></script>
+<script src="../js/send_data.js"></script>
 
 <script>
     let nome = sessionStorage.NOME_USUARIO
-
-    // Maiuscula
-    // for (let i = 0; i < array.length; i++) {
-    //     const element = array[i];
-
-    // }
-
     user_name.innerHTML = nome.toUpperCase()
+
+
+    function showDashTraining() {
+        let display_dash = document.getElementById("display_dash")
+        display_dash.style.display = "block"
+        setTimeout(() => {
+            display_dash.style.opacity = "1";
+        }, 10)
+    }
+
+    let graph_weight = document.getElementById("graph_weight")
+
+    const labels_linha = ['1', '2', '3', '4'];
+
+    const data_linha = {
+        labels: labels_linha,
+        datasets: [{
+            label: 'Progressão mês 1',
+            data: [30, 29, 28, 25],
+            borderWidth: 2
+        },
+        {
+            label: 'Progressão mês 2',
+            data: [32, 45, 46, 49],
+            borderWidth: 2
+        }
+        ]
+    };
+
+    new Chart(graph_weight, {
+        type: 'line',
+        data: data_linha,
+
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
 </script>

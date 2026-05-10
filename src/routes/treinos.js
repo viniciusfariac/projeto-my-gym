@@ -25,4 +25,8 @@ router.get("/frequencia-meta/:idUser", function (req, res) {
   treinoController.metaMensal(req, res)
 })
 
+router.get("/listar/:idUser", function (req, res) {
+  treinoController.buscarTreinoPorUsuario(req, res)
+})
+
 module.exports = router;
