@@ -33,4 +33,8 @@ router.get("/progressao-carga/:idUser/:idTraining/:idExercise", function (req, r
   treinoController.graficoEvolucaoCarga(req, res)
 })
 
+router.get("/progressao-rep/:idUser/:idTraining/:idExercise", function (req, res) {
+  treinoController.graficoEvolucaoRep(req, res)  
+})
+
 module.exports = router;

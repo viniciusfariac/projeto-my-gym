@@ -110,11 +110,39 @@ FROM
   return database.executar(instrucaoSql);
 }
 
+function graficoEvolucaoRep(id_user, id_training, id_exercise) {
+  var instrucaoSql = `
+  SELECT 
+	DATE(tr.training_date) training_date,
+    TRUNCATE(AVG(ts.rep), 2) average_rep
+  FROM
+    user u
+  JOIN training t ON u.id_user = t.user_id
+  JOIN training_exercise te ON te.training_id = t.id_training
+  JOIN exercise e ON e.id_exercise = te.exercise_id
+  JOIN training_log tr ON tr.training_exercise_id = te.id_training_exercise
+  JOIN training_set ts ON ts.training_log_id = tr.id_training_log
+  WHERE
+    u.id_user = ${id_user}
+  AND
+    t.id_training = ${id_training}
+  AND 
+    e.id_exercise = ${id_exercise}
+  AND
+    DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) <= tr.training_date
+  GROUP BY DATE(tr.training_date);
+  `
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarTreinoPorUsuario,
   cadastrarTreino,
   frequenciaNoMes,
   horarioFrequente,
   metaMensal,
-  graficoEvolucaoCarga
+  graficoEvolucaoCarga,
+  graficoEvolucaoRep
 }

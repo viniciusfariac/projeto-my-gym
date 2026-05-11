@@ -100,7 +100,7 @@
                 </article>
                 <article class="box_graph_training">
                     <h1>Comparação de repetições</h1>
-                    <canvas class="graph" id="graph_weight"></canvas>
+                    <canvas class="graph" id="graph_average"></canvas>
                 </article>
             </article>
         </div>
@@ -116,9 +116,35 @@
     let nome = sessionStorage.NOME_USUARIO
     user_name.innerHTML = nome.toUpperCase()
 
+    let graph_weight = document.getElementById("graph_weight")
 
+    let chart_weight = new Chart(graph_weight, {
+        type: 'line',
 
+        options: {
 
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    let graph_average = document.getElementById("graph_average")
+
+    let chart_average = new Chart(graph_average, {
+        type: 'line',
+
+        options: {
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
 
 

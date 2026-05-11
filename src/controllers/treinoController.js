@@ -122,11 +122,34 @@ function graficoEvolucaoCarga(req, res) {
     }
 }
 
+function graficoEvolucaoRep(req, res) {
+    var id_user = req.params.idUser
+    var id_exercise = req.params.idExercise
+    var id_training = req.params.idTraining
+
+    if (id_user == undefined) {
+        res.status(400).send("O id do usuário está undefined!");
+    } else if(id_exercise == undefined) {
+        res.status(400).send("O id do exercício está undefined!")
+    } else if (id_training == undefined)
+        res.status(400).send("O id do treino está undefined!")
+    else {
+        treinoModel.graficoEvolucaoRep(id_user, id_training, id_exercise)
+            .then(function (resultado) {
+                res.status(200).json(resultado)
+            })
+            .catch(function (error) {
+                res.status(500).json(error.sqlMessage)
+            })
+    }
+}
+
 module.exports = {
     cadastrarTreino,
     frequenciaNoMes,
     horarioFrequente,
     metaMensal,
     buscarTreinoPorUsuario,
-    graficoEvolucaoCarga
+    graficoEvolucaoCarga,
+    graficoEvolucaoRep
 }

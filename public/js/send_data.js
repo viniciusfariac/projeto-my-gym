@@ -339,45 +339,104 @@ async function showGraphWeight() {
         labels_lines.push(`${i + 1} Série`)
     }
 
-    console.log('datasets', datasets)
-    console.log(labels_lines)
-
-    let graph_weight = document.getElementById("graph_weight")
-
-    const data_linha = {
-        labels: labels_lines,
-        datasets
+    chart_weight.data = {
+        "labels": labels_lines,
+        "datasets": datasets
     };
 
-    console.log(data_linha)
-
-    new Chart(graph_weight, {
-        type: 'line',
-        data: data_linha,
-
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    chart_weight.update()
 }
 
-function showDashTraining() {
+async function searchProgressionRep(id_training, id_exercise, id_user) {
+    let response = await fetch(`/treinos/progressao-rep/${id_user}/${id_training}/${id_exercise}`)
+
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+async function showGraphRep() {
+    let select_training = document.getElementById("select_training")
+    let select_exercise = document.getElementById("select_exercise")
+
+    let id_training = select_training.value
+    let id_exercise = select_exercise.value
+    let id_user = sessionStorage.ID_USUARIO
+
+    let json = await searchProgressionRep(id_training, id_exercise, id_user)
+
+    let grouped_average = []
+    let datasets = []
+    let labels_lines = []
+
+    json.forEach((value) => {
+        let training_date = value.training_date
+        let date = new Date(training_date)
+        let month = date.getMonth() + 1
+
+        let month_exist = false
+        let index = -1
+
+        for (let i = 0; i < grouped_average.length; i++) {
+            const element = grouped_average[i];
+
+            if (element.month == month) {
+                month_exist = true
+                index = i
+                break
+            }
+        }
+
+        if (!month_exist) {
+            grouped_average.push({
+                month: month,
+                average: []
+            })
+            index = grouped_average.length - 1
+        }
+
+        grouped_average[index].average.push(value.average_rep)
+    })
+
+    for (let i = 0; i < grouped_average.length; i++) {
+        const element = grouped_average[i];
+
+        let month = element.month
+        let averages = element.average
+
+        datasets.push({
+            label: `Progressão mês ${month}`,
+            data: averages,
+            borderWidth: 2
+        })
+
+        labels_lines.push(`${i + 1} Série`)
+    }
+
+    chart_average.data = {
+        "labels": labels_lines,
+        "datasets": datasets
+    };
+
+    chart_average.update()
+}
+
+async function initDashTraining() {
+    await showUserTraining()
+    await showListTraining()
+}
+
+async function showDashTraining() {
     let display_dash = document.getElementById("display_dash")
     display_dash.style.display = "block"
     setTimeout(() => {
         display_dash.style.opacity = "1";
     }, 10)
 
-    showGraphWeight()
-}
-
-async function initDashTraining() {
-    await showUserTraining()
-    await showListTraining()
+    await showGraphWeight()
+    await showGraphRep()
 }
 
 async function initDash() {
