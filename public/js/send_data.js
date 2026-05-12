@@ -281,72 +281,6 @@ async function searchProgressionWeight(id_training, id_exercise, id_user) {
     return json
 }
 
-async function showGraphWeight() {
-    let select_training = document.getElementById("select_training")
-    let select_exercise = document.getElementById("select_exercise")
-
-    let id_training = select_training.value
-    let id_exercise = select_exercise.value
-    let id_user = sessionStorage.ID_USUARIO
-
-    let json = await searchProgressionWeight(id_training, id_exercise, id_user)
-
-    let grouped_weight = []
-    let datasets = []
-    let labels_lines = []
-
-    json.forEach((value) => {
-        let training_date = value.training_date
-        let date = new Date(training_date)
-        let month = date.getMonth() + 1
-
-        let month_exist = false
-        let index = -1
-
-        for (let i = 0; i < grouped_weight.length; i++) {
-            const element = grouped_weight[i];
-
-            if (element.month == month) {
-                month_exist = true
-                index = i
-                break
-            }
-        }
-
-        if (!month_exist) {
-            grouped_weight.push({
-                month: month,
-                weights: []
-            })
-            index = grouped_weight.length - 1
-        }
-
-        grouped_weight[index].weights.push(value.max_weight)
-    })
-
-    for (let i = 0; i < grouped_weight.length; i++) {
-        const element = grouped_weight[i];
-
-        let month = element.month
-        let weights = element.weights
-
-        datasets.push({
-            label: `Progressão mês ${month}`,
-            data: weights,
-            borderWidth: 2
-        })
-
-        labels_lines.push(`${i + 1} Série`)
-    }
-
-    chart_weight.data = {
-        "labels": labels_lines,
-        "datasets": datasets
-    };
-
-    chart_weight.update()
-}
-
 async function searchProgressionRep(id_training, id_exercise, id_user) {
     let response = await fetch(`/treinos/progressao-rep/${id_user}/${id_training}/${id_exercise}`)
 
@@ -357,7 +291,7 @@ async function searchProgressionRep(id_training, id_exercise, id_user) {
     return json
 }
 
-async function showGraphRep() {
+async function showGraphTraining(func, graph, data) {
     let select_training = document.getElementById("select_training")
     let select_exercise = document.getElementById("select_exercise")
 
@@ -365,9 +299,9 @@ async function showGraphRep() {
     let id_exercise = select_exercise.value
     let id_user = sessionStorage.ID_USUARIO
 
-    let json = await searchProgressionRep(id_training, id_exercise, id_user)
+    let json = await func(id_training, id_exercise, id_user)
 
-    let grouped_average = []
+    let grouped = []
     let datasets = []
     let labels_lines = []
 
@@ -379,8 +313,8 @@ async function showGraphRep() {
         let month_exist = false
         let index = -1
 
-        for (let i = 0; i < grouped_average.length; i++) {
-            const element = grouped_average[i];
+        for (let i = 0; i < grouped.length; i++) {
+            const element = grouped[i];
 
             if (element.month == month) {
                 month_exist = true
@@ -390,37 +324,41 @@ async function showGraphRep() {
         }
 
         if (!month_exist) {
-            grouped_average.push({
-                month: month,
-                average: []
+            grouped.push({
+                "month": month,
+                "datas": []
             })
-            index = grouped_average.length - 1
+            index = grouped.length - 1
+        }
+        if (data == "average_rep") {
+            grouped[index].datas.push(value.average_rep)
+        } else if (data == "max_weight") {
+            grouped[index].datas.push(value.max_weight)
         }
 
-        grouped_average[index].average.push(value.average_rep)
     })
 
-    for (let i = 0; i < grouped_average.length; i++) {
-        const element = grouped_average[i];
+    for (let i = 0; i < grouped.length; i++) {
+        const element = grouped[i];
 
         let month = element.month
-        let averages = element.average
+        let data_opt = element.datas
 
         datasets.push({
             label: `Progressão mês ${month}`,
-            data: averages,
+            data: data_opt,
             borderWidth: 2
         })
 
         labels_lines.push(`${i + 1} Série`)
     }
 
-    chart_average.data = {
+    graph.data = {
         "labels": labels_lines,
         "datasets": datasets
     };
 
-    chart_average.update()
+    graph.update()
 }
 
 async function initDashTraining() {
@@ -435,8 +373,8 @@ async function showDashTraining() {
         display_dash.style.opacity = "1";
     }, 10)
 
-    await showGraphWeight()
-    await showGraphRep()
+    await showGraphTraining(searchProgressionWeight, chart_weight, "max_weight")
+    await showGraphTraining(searchProgressionRep, chart_average, "average_rep")
 }
 
 async function initDash() {
@@ -446,3 +384,70 @@ async function initDash() {
     await showListTraining()
 }
 
+
+
+// async function showGraphWeight() {
+//     let select_training = document.getElementById("select_training")
+//     let select_exercise = document.getElementById("select_exercise")
+
+//     let id_training = select_training.value
+//     let id_exercise = select_exercise.value
+//     let id_user = sessionStorage.ID_USUARIO
+
+//     let json = await searchProgressionWeight(id_training, id_exercise, id_user)
+
+//     let grouped_weight = []
+//     let datasets = []
+//     let labels_lines = []
+
+//     json.forEach((value) => {
+//         let training_date = value.training_date
+//         let date = new Date(training_date)
+//         let month = date.getMonth() + 1
+
+//         let month_exist = false
+//         let index = -1
+
+//         for (let i = 0; i < grouped_weight.length; i++) {
+//             const element = grouped_weight[i];
+
+//             if (element.month == month) {
+//                 month_exist = true
+//                 index = i
+//                 break
+//             }
+//         }
+
+//         if (!month_exist) {
+//             grouped_weight.push({
+//                 month: month,
+//                 weights: []
+//             })
+//             index = grouped_weight.length - 1
+//         }
+
+//         grouped_weight[index].weights.push(value.max_weight)
+//     })
+
+//     for (let i = 0; i < grouped_weight.length; i++) {
+//         const element = grouped_weight[i];
+
+//         let month = element.month
+//         let weights = element.weights
+
+//         datasets.push({
+//             label: `Progressão mês ${month}`,
+//             data: weights,
+//             borderWidth: 2
+//         })
+
+//         labels_lines.push(`${i + 1} Série`)
+//     }
+
+//     chart_weight.data = {
+//         "labels": labels_lines,
+//         "datasets": datasets
+//     };
+
+//     chart_weight.update()
+// }
