@@ -40,23 +40,22 @@
             <nav class="nav_container">
                 <ul class="list_nav">
                     <li class="item_list">Treinos</li>
-                    <div class="list_ref">
-                        <li class="item_list"><a href="training_set.html" id="training_available">Upper A</a></li>
-                        <li class="item_list"><a href="training_set.html" id="training_available">Upper B</a></li>
-                        <li class="item_list"><a href="training_set.html" id="training_available">Lower A</a></li>
-                        <li class="item_list"><a href="training_set.html" id="training_available">Lower B</a></li>
+                    <div class="list_ref" id="list_training">
                     </div>
                 </ul>
             </nav>
             <nav class="nav_container">
                 <ul class="list_nav">
                     <li class="item_list"><a href="register_training.html">Cadastrar treino</a></li>
-        </div>
-        </ul>
-        </nav>
+                </ul>
+            </nav>
         </div>
         <div class="aside_footer">
             <p class="user_name">Usuário: <span id="user_name"></span></p>
+            <button id="logout-btn" onclick="logout()" class="logout-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span class="text_logout">Sair</span>
+            </button>
         </div>
     </aside>
 

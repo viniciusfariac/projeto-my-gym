@@ -385,69 +385,7 @@ async function initDash() {
 }
 
 
-
-// async function showGraphWeight() {
-//     let select_training = document.getElementById("select_training")
-//     let select_exercise = document.getElementById("select_exercise")
-
-//     let id_training = select_training.value
-//     let id_exercise = select_exercise.value
-//     let id_user = sessionStorage.ID_USUARIO
-
-//     let json = await searchProgressionWeight(id_training, id_exercise, id_user)
-
-//     let grouped_weight = []
-//     let datasets = []
-//     let labels_lines = []
-
-//     json.forEach((value) => {
-//         let training_date = value.training_date
-//         let date = new Date(training_date)
-//         let month = date.getMonth() + 1
-
-//         let month_exist = false
-//         let index = -1
-
-//         for (let i = 0; i < grouped_weight.length; i++) {
-//             const element = grouped_weight[i];
-
-//             if (element.month == month) {
-//                 month_exist = true
-//                 index = i
-//                 break
-//             }
-//         }
-
-//         if (!month_exist) {
-//             grouped_weight.push({
-//                 month: month,
-//                 weights: []
-//             })
-//             index = grouped_weight.length - 1
-//         }
-
-//         grouped_weight[index].weights.push(value.max_weight)
-//     })
-
-//     for (let i = 0; i < grouped_weight.length; i++) {
-//         const element = grouped_weight[i];
-
-//         let month = element.month
-//         let weights = element.weights
-
-//         datasets.push({
-//             label: `Progressão mês ${month}`,
-//             data: weights,
-//             borderWidth: 2
-//         })
-
-//         labels_lines.push(`${i + 1} Série`)
-//     }
-
-//     chart_weight.data = {
-//         "labels": labels_lines,
-//         "datasets": datasets
-//     };
-
-//     chart_weight.update()
-// }
+function logout() {
+    sessionStorage.clear();
+    window.location = "../login.html";
+}

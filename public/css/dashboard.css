@@ -662,3 +662,25 @@ select {
     align-items: center;
     gap: 1rem;
 }
+
+
+.fa-solid {
+    rotate: 180deg;
+    color: var(--text-dark);
+}
+
+.aside_footer .logout-btn{
+    margin: 1rem 0;
+}
+
+.aside_footer .fa-solid,
+.aside_footer .text_logout {
+    font-size: 1rem;
+} 
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+}
