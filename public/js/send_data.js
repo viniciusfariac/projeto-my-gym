@@ -265,14 +265,14 @@ async function showTrainingExercise() {
 
     json_exercise.forEach((exercise) => {
         let exercise_name = exercise.exercise_name
-        let id_exercise = exercise.id_exercise
+        let id_training_exercise = exercise.id_training_exercise
 
-        select_exercise.innerHTML += `<option value="${id_exercise}">${exercise_name}</option>`
+        select_exercise.innerHTML += `<option value="${id_training_exercise}">${exercise_name}</option>`
     })
 }
 
-async function searchProgressionWeight(id_training, id_exercise, id_user) {
-    let response = await fetch(`/treinos/progressao-carga/${id_user}/${id_training}/${id_exercise}`)
+async function searchProgressionWeight(id_training_exercise, id_user) {
+    let response = await fetch(`/treinos/progressao-carga/${id_user}/${id_training_exercise}`)
 
     let json = await response.json()
 
@@ -281,8 +281,8 @@ async function searchProgressionWeight(id_training, id_exercise, id_user) {
     return json
 }
 
-async function searchProgressionRep(id_training, id_exercise, id_user) {
-    let response = await fetch(`/treinos/progressao-rep/${id_user}/${id_training}/${id_exercise}`)
+async function searchProgressionRep(id_training_exercise, id_user) {
+    let response = await fetch(`/treinos/progressao-rep/${id_user}/${id_training_exercise}`)
 
     let json = await response.json()
 
@@ -295,11 +295,10 @@ async function showGraphTraining(func, graph, data) {
     let select_training = document.getElementById("select_training")
     let select_exercise = document.getElementById("select_exercise")
 
-    let id_training = select_training.value
     let id_exercise = select_exercise.value
     let id_user = sessionStorage.ID_USUARIO
 
-    let json = await func(id_training, id_exercise, id_user)
+    let json = await func(id_exercise, id_user)
 
     let grouped = []
     let datasets = []
@@ -375,15 +374,185 @@ async function showDashTraining() {
 
     await showGraphTraining(searchProgressionWeight, chart_weight, "max_weight")
     await showGraphTraining(searchProgressionRep, chart_average, "average_rep")
+    await showKpisTraining()
 }
+
+async function searchTotalWeight() {
+    let id_user = sessionStorage.ID_USUARIO
+
+    let response = await fetch(`/treino-registro/peso-total/${id_user}/30`)
+    let json = await response.json()
+
+    return json
+}
+
+async function showTotalWeight() {
+    let json = await searchTotalWeight()
+
+    if (json.length <= 0) {
+        console.log("ERRO")
+        return false
+    }
+
+
+    if (!json[0].peso_total) {
+        return kpi_total_weight.innerHTML = "0"
+    }
+
+    kpi_total_weight.innerHTML = json[0].peso_total
+}
+
+async function searchComeDay() {
+    let id_user = sessionStorage.ID_USUARIO
+
+    let response = await fetch(`/treino-registro/dia-ido/${id_user}`)
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+async function searchCompareExercise(id_training_exercise) {
+
+    let response = await fetch(`/treino-registro/comparacao-treino/${id_training_exercise}`)
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+async function searchPr(id_training_exercise) {
+    let response = await fetch(`/treino-registro/maximo-carga/${id_training_exercise}`)
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+
+async function showKpisTraining() {
+    let id_training_exercise = select_exercise.value
+    let json_compare = await searchCompareExercise(id_training_exercise)
+    let json_pr = await searchPr(id_training_exercise)
+    console.log(json_compare, json_pr, json_compare.length, json_pr.length)
+    let volume;
+    let reps;
+    let pr;
+    if (json_compare.length > 0 && json_pr.length > 0) {
+        volume = json_compare[0]["progresso_volume"]
+        reps = json_compare[0]["progresso_reps"]
+        pr = json_pr[0]["pr"]
+    }
+
+
+    let kpi_rep = document.getElementById("kpi-rep")
+    let kpi_weight = document.getElementById("kpi-weight")
+    let kpi_pr = document.getElementById("kpi-pr")
+
+    kpi_rep.innerHTML = reps ? `${reps} reps` : "Sem dados"
+    kpi_weight.innerHTML = volume ? volume : "Sem dados"
+    kpi_pr.innerHTML = pr ? `${pr}kg` : "Sem dados"
+
+}
+
+async function searchFrequencyWeek() {
+    let id_user = sessionStorage.ID_USUARIO
+
+    let response = await fetch(`/treino-registro/frequencia-semana/${id_user}`)
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+async function searchWeekComparison() {
+    let id_user = sessionStorage.ID_USUARIO
+
+    let response = await fetch(`/treino-registro/comparacao-semana/${id_user}`)
+    let json = await response.json()
+
+    console.log(json)
+
+    return json
+}
+
+async function showGraphFrequencyWeek() {
+    let json = await searchFrequencyWeek()
+    let graph = week_comparison_chart
+
+    let datasets = []
+    let labels_lines = ["Semana 1", "Semana 2", "Semana 3", "Semana 4"]
+    let days_gone = []
+
+    json.forEach((value) => {
+        days_gone.push(value.frequencia_semana)
+    })
+
+    datasets.push({
+        label: "Frequência",
+        data: days_gone,
+        backgroundColor: 'rgba(59,130,246,0.3)',
+        borderColor: '#3b82f6',
+        borderWidth: 2
+    })
+
+    console.log(datasets)
+    graph.data = {
+        "labels": labels_lines,
+        "datasets": datasets
+    };
+
+    graph.update()
+}
+
+async function showGraphWeekComparison() {
+    let json = await searchWeekComparison()
+    let graph = weekly_frequency_chart
+
+    let datasets = []
+    let labels_lines = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabádo", "Domingo"]
+    let frequency = new Array(7)
+    console.log(frequency)
+
+    json.forEach((value) => {
+        frequency[value.dia_semana - 2] = value.frequencia
+    })
+
+    datasets.push({
+        label: "Frequência",
+        data: frequency,
+        backgroundColor: 'rgba(59,130,246,0.3)',
+        borderColor: '#3b82f6',
+        borderWidth: 2
+    })
+
+    console.log(datasets)
+    graph.data = {
+        "labels": labels_lines,
+        "datasets": datasets
+    };
+
+    graph.update()
+}
+
 
 async function initDash() {
     await showFrequencyDay()
     await showFrequencyHour()
     await showGoal()
+    await showTotalWeight()
     await showListTraining()
+    await showGraphFrequencyWeek()
+    await showGraphWeekComparison()
 }
 
+async function initTrainingSet() {
+    await showListTraining()
+}
 
 function logout() {
     sessionStorage.clear();

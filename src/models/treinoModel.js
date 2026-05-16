@@ -82,7 +82,7 @@ function metaMensal(user_id) {
   return database.executar(instrucaoSql);
 }
 
-function graficoEvolucaoCarga(id_user, id_training, id_exercise) {
+function graficoEvolucaoCarga(id_user, id_training_exercise) {
   var instrucaoSql = `
   SELECT 
     DISTINCT (tr.training_date),
@@ -97,9 +97,7 @@ FROM
   WHERE
     u.id_user = ${id_user}
   AND
-    t.id_training = ${id_training}
-  AND 
-    e.id_exercise = ${id_exercise}
+    tr.training_exercise_id = ${id_training_exercise}
   AND
     DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) <= tr.training_date
   GROUP BY tr.training_date
@@ -110,7 +108,7 @@ FROM
   return database.executar(instrucaoSql);
 }
 
-function graficoEvolucaoRep(id_user, id_training, id_exercise) {
+function graficoEvolucaoRep(id_user, id_training_exercise) {
   var instrucaoSql = `
   SELECT 
 	DATE(tr.training_date) training_date,
@@ -125,9 +123,7 @@ function graficoEvolucaoRep(id_user, id_training, id_exercise) {
   WHERE
     u.id_user = ${id_user}
   AND
-    t.id_training = ${id_training}
-  AND 
-    e.id_exercise = ${id_exercise}
+    tr.training_exercise_id = ${id_training_exercise}
   AND
     DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) <= tr.training_date
   GROUP BY DATE(tr.training_date);

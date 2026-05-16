@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- CDN AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -68,36 +71,48 @@
             <div class="kpi">
                 <p>Você Treinou</p>
                 <p class="kpi-highlight"><span id="kpi_day" class="kpi-highlight"></span>x esse mês</p>
-                <p class="kpi-base">Com base nos últimos 30 dias</p>
+                <p class="kpi-base">Nos últimos 30 dias</p>
             </div>
             <div class="kpi">
-                <p>Seu horário mais frequente</p>
+                <p>Horário mais frequente</p>
                 <p class="kpi-highlight kpi-highlight-often"><span id="kpi_often"
                         class="kpi-highlight kpi-highlight-often"></span> horas</p>
-                <p class="kpi-base">Com base nos últimos 30 dias</p>
+                <p class="kpi-base">Nos últimos 30 dias</p>
             </div>
             <div class="kpi">
-                <p>Sua meta mensal</p>
+                <p>Meta mensal</p>
                 <p class="kpi-highlight">Voce precisa treinar <span id="kpi_goal_month"
                         class="kpi-highlight"></span><span class="kpi-highlight">x</span></p>
                 <p class="kpi-base">Seu progresso atual <span id="kpi_goal_progress"></span></p>
+            </div>
+            <div class="kpi">
+                <p>Quanto peso levantou</p>
+                <p class="kpi-highlight"><span id="kpi_total_weight" class="kpi-highlight"></span><span
+                        class="kpi-highlight">kg</span></p>
+                <p class="kpi-base">Nos últimos 30 dias</p>
             </div>
         </article>
         <article class="container_graph">
 
             <article class="box_graph">
-                <h1>Frequência na semana</h1>
-                <canvas class="graph"></canvas>
+                <h1>Comparação entre dias da semana</h1>
+                <div class="content_graph">
+                    <canvas id="weekly_frequency_chart" class="graph"></canvas>
+                </div>
             </article>
             <article class="box_graph">
                 <h1>Frequência no mês</h1>
-                <canvas class="graph"></canvas>
+                <div class="content_graph">
+                    <canvas id="month_frequency_chart" class="graph"></canvas>
+                </div>
             </article>
         </article>
         <article class="container_graph">
             <article class="box_graph">
                 <h1>Comparação entre as semanas</h1>
-                <canvas class="graph"></canvas>
+                <div class="content_graph">
+                    <canvas id="week_comparison_chart" class="graph"></canvas>
+                </div>
             </article>
         </article>
     </main>
@@ -110,11 +125,78 @@
 <script>
     let nome = sessionStorage.NOME_USUARIO
 
-    // Maiuscula
-    // for (let i = 0; i < array.length; i++) {
-    //     const element = array[i];
-
-    // }
-
     user_name.innerHTML = nome.toUpperCase()
+
+    const defaultOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+            layout: {
+                padding: {
+                    top: 1000000000
+                }
+            },
+            legend: {
+                labels: {
+                    color: "#FFF",
+                    font: {
+                        size: 14
+                    }
+                },
+            }
+        },
+
+        scales: {
+            x: {
+                ticks: {
+                    color: "#FFFF"
+                },
+                grid: {
+                    color: "rgba(255,255,255,0.02)"
+                }
+            },
+
+            y: {
+                beginAtZero: true,
+
+                ticks: {
+                    color: "#FFF"
+                },
+
+                grid: {
+                    color: "rgba(255,255,255,0.02)"
+                }
+            }
+        },
+
+        animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
+        }
+    }
+
+    let weekly_frequency = document.getElementById("weekly_frequency_chart")
+
+    let weekly_frequency_chart = new Chart(weekly_frequency, {
+        type: 'bar',
+
+        options: defaultOptions
+    });
+
+    let week_comparison = document.getElementById("week_comparison_chart")
+
+    let week_comparison_chart = new Chart(week_comparison, {
+        type: 'bar',
+
+        options: defaultOptions
+    });
+
+    let month_frequency = document.getElementById("month_frequency_chart")
+
+    let month_frequency_chart = new Chart(month_frequency, {
+        type: 'line',
+
+        options: defaultOptions
+    });
 </script>

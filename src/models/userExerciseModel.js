@@ -41,6 +41,7 @@ function cadastrarExercisioNoTreino(training_id, exercise_id, set_exercise) {
 function listarTreinoExercisioUsuario(training_id) {
     var instrucaoSql = `
     SELECT 
+    te.id_training_exercise,
 	e.url_image,
     e.exercise_name,
     e.description,

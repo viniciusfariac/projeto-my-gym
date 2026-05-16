@@ -5,7 +5,7 @@ var treinoController = require("../controllers/treinoController");
 const { route } = require(".");
 
 
-router.get("/:empresaId", function (req, res) {
+router.get("/:idUser", function (req, res) {
   treinoController.buscarTreinoPorUsuario(req, res);
 });
 
@@ -29,11 +29,11 @@ router.get("/listar/:idUser", function (req, res) {
   treinoController.buscarTreinoPorUsuario(req, res)
 })
 
-router.get("/progressao-carga/:idUser/:idTraining/:idExercise", function (req, res) {
+router.get("/progressao-carga/:idUser/:idTrainingExercise", function (req, res) {
   treinoController.graficoEvolucaoCarga(req, res)
 })
 
-router.get("/progressao-rep/:idUser/:idTraining/:idExercise", function (req, res) {
+router.get("/progressao-rep/:idUser/:idTrainingExercise", function (req, res) {
   treinoController.graficoEvolucaoRep(req, res)  
 })
 

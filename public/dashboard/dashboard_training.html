@@ -21,7 +21,12 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 
+    <!-- Chart JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CDN AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body onload="initDashTraining()">
@@ -85,14 +90,19 @@
         </article>
         <div id="display_dash">
             <article class="kpi_container">
-                <div class="kpi">
+                <div class="kpi kpi-training">
                     <p>Progrediu repetição</p>
-                    <p class="kpi-highlight"><span id="kpi-day" class="kpi-highlight">1</span> repetição</p>
+                    <p class="kpi-highlight"><span id="kpi-rep"></span></p>
                     <p class="kpi-base">Em comparação com o último treino</p>
                 </div>
-                <div class="kpi">
-                    <p>Progrediu carga</p>
-                    <p class="kpi-highlight kpi-highlight-often" id="kpi-often">0kg carga</p>
+                <div class="kpi kpi-training">
+                    <p>Seu volume do treino mudou</p>
+                    <p class="kpi-highlight kpi-highlight-often"><span id="kpi-weight"></span></p>
+                    <p class="kpi-base">Em comparação com o último treino</p>
+                </div>
+                <div class="kpi kpi-training">
+                    <p>Pr no exercício</p>
+                    <p class="kpi-highlight kpi-highlight-often"><span id="kpi-pr"></span></p>
                     <p class="kpi-base">Em comparação com o último treino</p>
                 </div>
             </article>
