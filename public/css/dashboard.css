@@ -182,58 +182,104 @@ main {
 
 
 /* Tela para cadastrar serie */
-.container_training {
-    background-color: var(--bg-secondary);
-    width: 70%;
-    margin: 0 auto;
-    padding: 3rem;
-    border-radius: 10px;
-    min-height: 100vh;
+
+.container_title {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.container_training_set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_training {
+    width: 90%;
+    background-color: var(--bg-fourth);
+    padding: 2.5rem;
+    border-radius: 20px;
+    margin: 0 auto;
 }
 
 /* Conteiner dos exercícios */
 .container_exercise {
     display: flex;
-    gap: 4rem;
-    height: 100%;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.02);
+    margin-bottom: 2rem;
 }
 
+
 /* Conteudo dos exercícios */
-.content_exercise {
-    height: 100%;
+.container_exercise img {
+    width: 320px;
+    height: 320px;
+    border-radius: 18px;
+}
+.container_set {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+.name_exercise {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+    font-weight: 800;
+}
+
+.description_exercise {
+    opacity: 0.7;
+}
+
+.content_header {
+    margin-bottom: 2rem;
 }
 
 /* Conteúdo principal dos exercícios */
 .content_main {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 6rem;
     flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.input_set {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input_set span {
+    width: 80px;
+    font-weight: 600;
 }
 
 /* Padrão do input */
 .input_set input {
+    flex: 1;
     background-color: var(--bg-third);
     border: 1px solid #2c2c3a;
     border-radius: 10px;
-    padding: 0.5rem;
+    padding: 0.7rem 1rem;
     color: var(--text-dark);
     font-size: 1rem;
     outline: none;
-    transition: all 0.5s ease;
-    width: 40%;
+    transition: 0.5s ease;
 }
 
 /* Quando passa por cima, cor suave */
 .input_set input:hover {
-    border-color: var(--bg-third);
-    transition: all 0.5 ease;
+    transition: 0.5s ease-in-out;
+    transform: translateY(-2px);
 }
 
 /* Quando clica no input */
@@ -244,7 +290,30 @@ main {
 
 /* Placeholder do input */
 .input_set input::placeholder {
-    color: var(--bg-third);
+    color: var(--text-dark);
+    opacity: 0.5;
+}
+/* Estilização botão para enviar serie */
+.button_input {
+    margin: 0 auto;
+}
+
+
+/* Background color do botão */
+
+
+.button_set {
+    background-color: var(--bg-third);
+}
+
+.button_set:hover {
+    transform: translateY(-4px);
+}
+
+.button_input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Tirando setinha do type number navegadores*/
@@ -257,25 +326,6 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Tirando setinha do type number firefox */
 input[type="number"] {
     -moz-appearance: textfield;
-}
-
-/* Estilização das imagens dos exercícios */
-.container_exercise img {
-    width: 35%;
-    height: 100%;
-    border-radius: 10px;
-}
-
-/* Estilização botão para enviar serie */
-.button_input {
-    margin: 0 auto;
-    margin-top: 2rem;
-}
-
-
-/* Background color do botão */
-.button {
-    background-color: var(--bg-third);
 }
 
 /* Container da dash */

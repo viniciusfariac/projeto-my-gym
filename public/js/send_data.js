@@ -539,6 +539,55 @@ async function showGraphWeekComparison() {
     graph.update()
 }
 
+async function showSetExercises() {
+    const params = new URLSearchParams(window.location.search);
+
+    const id_training = params.get("id");
+
+    let json = await searchTrainingExercise(id_training)
+
+    let container_exercise = document.getElementById("container_training")
+    let container_title = document.getElementById("container_title")
+
+    container_title.innerHTML = `
+        <h1>CADASTRAR SESSÃO</h1>
+        <h2>${json[0].name_training}</h2>
+    `
+    json.forEach((value) => {
+        let div_set = "";
+        for (let i = 1; i <= value.set_exercise; i++) {
+            const qtd = value.set_exercise[i];
+            const name_exercise = value.exercise_name.trim().replaceAll(' ', '_').toLowerCase()
+            div_set += `
+            <div class="input_set" id="${name_exercise}">
+                <span>Serie ${i}</span>
+                <input type="number" placeholder="120kg" id="${name_exercise}_weight_${i}">
+                <input type="number" placeholder="10reps" id="${name_exercise}_reps${i}">
+            </div>
+            `
+        }
+        container_exercise.innerHTML += `
+        <section class="container_exercise">
+                    <img src="${value.url_image}"
+                        alt="Imagem de ${value.exercise_name}">
+                    <div class="container_set" id="container_set">
+                        <div class="content_header" id="content_header">
+                            <h2 class="name_exercise" id="${value.id_training_exercise}">${value.exercise_name}</h2>
+                            <p class="description_exercise" id="description_exercise">${value.description}</p>
+                        </div>
+                        <div class="content_main">
+                            ${div_set}
+                        </div>
+                    </div>
+                </section>`
+    })
+
+    container_exercise.innerHTML += `               
+    <div class="button_input" id="button_input">
+        <button class="button button_set">Registrar serie</button>
+    </div>`
+}
+
 
 async function initDash() {
     await showFrequencyDay()
@@ -552,6 +601,7 @@ async function initDash() {
 
 async function initTrainingSet() {
     await showListTraining()
+    await showSetExercises()
 }
 
 function logout() {
