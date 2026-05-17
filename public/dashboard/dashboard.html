@@ -70,25 +70,25 @@
         <article class="kpi_container">
             <div class="kpi">
                 <p>Você Treinou</p>
-                <p class="kpi-highlight"><span id="kpi_day" class="kpi-highlight"></span>x esse mês</p>
+                <p class="kpi-highlight"><span id="kpi_day" class="kpi-highlight"></span></p>
                 <p class="kpi-base">Nos últimos 30 dias</p>
             </div>
             <div class="kpi">
                 <p>Horário mais frequente</p>
                 <p class="kpi-highlight kpi-highlight-often"><span id="kpi_often"
-                        class="kpi-highlight kpi-highlight-often"></span> horas</p>
+                        class="kpi-highlight kpi-highlight-often"></span></p>
                 <p class="kpi-base">Nos últimos 30 dias</p>
             </div>
             <div class="kpi">
                 <p>Meta mensal</p>
-                <p class="kpi-highlight">Voce precisa treinar <span id="kpi_goal_month"
-                        class="kpi-highlight"></span><span class="kpi-highlight">x</span></p>
-                <p class="kpi-base">Seu progresso atual <span id="kpi_goal_progress"></span></p>
+                <p class="kpi-highlight"><span id="kpi_goal_month" class="kpi-highlight"></span><span
+                        class="kpi-highlight"></span></p>
+                <p class="kpi-base"><span id="kpi_goal_progress"></span></p>
             </div>
             <div class="kpi">
                 <p>Quanto peso levantou</p>
                 <p class="kpi-highlight"><span id="kpi_total_weight" class="kpi-highlight"></span><span
-                        class="kpi-highlight">kg</span></p>
+                        class="kpi-highlight"></span></p>
                 <p class="kpi-base">Nos últimos 30 dias</p>
             </div>
         </article>
@@ -101,17 +101,25 @@
                 </div>
             </article>
             <article class="box_graph">
-                <h1>Frequência no mês</h1>
+                <h1>Comparação entre as semanas</h1>
                 <div class="content_graph">
-                    <canvas id="month_frequency_chart" class="graph"></canvas>
+                    <canvas id="week_comparison_chart" class="graph"></canvas>
                 </div>
             </article>
         </article>
         <article class="container_graph">
             <article class="box_graph">
-                <h1>Comparação entre as semanas</h1>
-                <div class="content_graph">
-                    <canvas id="week_comparison_chart" class="graph"></canvas>
+                <h1>Frequência no mês</h1>
+                <div class="week_days">
+                    <span>SEG</span>
+                    <span>TER</span>
+                    <span>QUA</span>
+                    <span>QUI</span>
+                    <span>SEX</span>
+                    <span>SAB</span>
+                    <span>DOM</span>
+                </div>
+                <div class="content_graph_month" id="content_graph_month">
                 </div>
             </article>
         </article>
@@ -183,14 +191,6 @@
 
     let week_comparison_chart = new Chart(week_comparison, {
         type: 'bar',
-
-        options: defaultOptions
-    });
-
-    let month_frequency = document.getElementById("month_frequency_chart")
-
-    let month_frequency_chart = new Chart(month_frequency, {
-        type: 'line',
 
         options: defaultOptions
     });

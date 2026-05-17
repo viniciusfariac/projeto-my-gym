@@ -145,21 +145,16 @@ async function showFrequencyDay() {
         }
     })
 
-    console.log("AA")
-
     let json = await response.json()
 
     if (json.length <= 0) {
-        console.log("ERRO")
-        return false
+        return kpi_day.innerHTML = "Sem dados cadastrados"
     }
-
-    console.log(json)
 
     if (!json[0].frequencia) {
-        return kpi_day.innerHTML = "Sem treinos cadastrados"
+        return kpi_day.innerHTML = "Sem dados cadastrados"
     }
-    kpi_day.innerHTML = json[0].frequencia
+    kpi_day.innerHTML = `${json[0].frequencia}x esse mês`
 }
 
 async function showFrequencyHour() {
@@ -173,15 +168,14 @@ async function showFrequencyHour() {
     let json = await response.json()
 
     if (json.length <= 0) {
-        console.log("ERRO")
-        return false
+        return kpi_often.innerHTML = "Sem dados cadastrados"
     }
 
     if (!json[0].horario) {
-        return kpi_often.innerHTML = "Sem treinos cadastrados"
+        return kpi_often.innerHTML = "Sem dados cadastrados"
     }
 
-    kpi_often.innerHTML = json[0].horario
+    kpi_often.innerHTML = `${json[0].horario} horas`
 }
 
 async function showGoal() {
@@ -196,17 +190,18 @@ async function showGoal() {
     let json = await response.json()
 
     if (json.length <= 0) {
-        console.log("ERRO")
-        return false
+        kpi_goal_progress.innerHTML = "Nos últimos 30 dias"
+        return kpi_goal_month.innerHTML = "Sem treinos cadastrados"
     }
 
 
     if (!json[0].meta_mensal || !json[0].dias_treinados || !json[0].progresso) {
-        return kpi_trained_day.innerHTML = "Sem treinos cadastrados"
+        kpi_goal_progress.innerHTML = "Nos últimos 30 dias"
+        return kpi_goal_month.innerHTML = "Sem treinos cadastrados"
     }
 
-    kpi_goal_month.innerHTML = json[0].meta_mensal
-    kpi_goal_progress.innerHTML = json[0].progresso
+    kpi_goal_month.innerHTML = `Você precisa treinar ${json[0].meta_mensal}x`
+    kpi_goal_progress.innerHTML = `Seu progresso atual ${json[0].progresso}`
 }
 
 async function searchUserTraining() {
@@ -233,6 +228,15 @@ async function searchTrainingExercise(id_training) {
 
 async function showUserTraining() {
     let json = await searchUserTraining()
+    let validate = validatingUserTraining(json)
+
+    if (!validate) {
+        let content_choices = document.getElementById('content_choices')
+        content_choices.innerHTML = `
+        <h1>CADASTRE UM TREINO PRIMEIRO</h1>
+        <h2>Clique logo abaixo: </h2><span><a href="./register_training.html">Cadastrar treino</a>`
+        return
+    }
 
     let element_html = document.getElementById('select_training')
     element_html.innerHTML = `<option value="default" selected disabled>Escolha o treino</option>`
@@ -371,11 +375,6 @@ async function showGraphTraining(func, graph, data) {
     graph.update()
 }
 
-async function initDashTraining() {
-    await showUserTraining()
-    await showListTraining()
-}
-
 async function showDashTraining() {
     let display_dash = document.getElementById("display_dash")
     display_dash.style.display = "block"
@@ -401,16 +400,14 @@ async function showTotalWeight() {
     let json = await searchTotalWeight()
 
     if (json.length <= 0) {
-        console.log("ERRO")
-        return false
+        return kpi_total_weight.innerHTML = "Sem dados cadastrados"
     }
-
 
     if (!json[0].peso_total) {
-        return kpi_total_weight.innerHTML = "0"
+        return kpi_total_weight.innerHTML = "Sem dados cadastrados"
     }
 
-    kpi_total_weight.innerHTML = json[0].peso_total
+    kpi_total_weight.innerHTML = `${json[0].peso_total}kg`
 }
 
 async function searchComeDay() {
@@ -419,7 +416,7 @@ async function searchComeDay() {
     let response = await fetch(`/treino-registro/dia-ido/${id_user}`)
     let json = await response.json()
 
-    console.log(json)
+    console.log('Month: ', json)
 
     return json
 }
@@ -452,9 +449,12 @@ async function showKpisTraining() {
     let volume;
     let reps;
     let pr;
-    if (json_compare.length > 0 && json_pr.length > 0) {
+    if (json_compare.length > 0) {
         volume = json_compare[0]["progresso_volume"]
         reps = json_compare[0]["progresso_reps"]
+    }
+
+    if (json_pr.length > 0) {
         pr = json_pr[0]["pr"]
     }
 
@@ -466,7 +466,6 @@ async function showKpisTraining() {
     kpi_rep.innerHTML = reps ? `${reps} reps` : "Sem dados"
     kpi_weight.innerHTML = volume ? volume : "Sem dados"
     kpi_pr.innerHTML = pr ? `${pr}kg` : "Sem dados"
-
 }
 
 async function searchFrequencyWeek() {
@@ -695,6 +694,57 @@ function validatingRegisterTraining() {
 
     return boolean
 }
+
+function validatingUserTraining(json) {
+    return json.length > 0 ? true : false
+}
+
+function showMonthCalendar() {
+    let content = document.getElementById("content_graph_month")
+    const months = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
+    const week_days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]
+
+    let current_date = new Date()
+    let current_month = current_date.getMonth()
+    let current_year = current_date.getFullYear()
+    let first_day = new Date(`${current_year}-${current_month + 1}-01`)
+    let first_week = first_day.getDay()
+
+    const days = [31, (current_year % 4 == 0 && current_year % 100 != 0) || (current_year % 400 == 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    let month = months[current_month]
+    let day = days[current_month]
+
+    for (let i = 0; i < first_week; i++) {
+        content.innerHTML += `
+        <div></div>
+        `
+    }
+    for (let i = 1; i <= day; i++) {
+        content.innerHTML += `
+        <div class="chart_square" id="${i}">
+            <p>${i}</p>
+        </div>
+        `
+    }
+}
+
+async function plotCalendar() {
+    showMonthCalendar()
+    let json = await searchComeDay()
+
+    let days = []
+    let chart_square = document.querySelectorAll(".chart_square")
+    json.forEach((value) => {
+        days.push(value.dia)
+    })
+
+    chart_square.forEach((value) => {
+        if (days.includes(Number(value.id))) {
+            value.style.backgroundColor = "#16A34A"
+        }
+    })
+}
+
 async function initDash() {
     await showFrequencyDay()
     await showFrequencyHour()
@@ -703,11 +753,17 @@ async function initDash() {
     await showListTraining()
     await showGraphFrequencyWeek()
     await showGraphWeekComparison()
+    await plotCalendar()
 }
 
 async function initTrainingSet() {
     await showListTraining()
     await showSetExercises()
+}
+
+async function initDashTraining() {
+    await showUserTraining()
+    await showListTraining()
 }
 
 function logout() {
