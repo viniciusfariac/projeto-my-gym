@@ -561,8 +561,8 @@ async function showSetExercises() {
             div_set += `
             <div class="input_set" id="${name_exercise}">
                 <span>Serie ${i}</span>
-                <input type="number" placeholder="120kg" id="${name_exercise}_weight_${i}">
-                <input type="number" placeholder="10reps" id="${name_exercise}_reps${i}">
+                <input type="number" placeholder="120kg" id="${i}" class="${value.exercise_name.replaceAll(' ', '_').toLowerCase()}_weight">
+                <input type="number" placeholder="10reps" id="${i}" class="${value.exercise_name.replaceAll(' ', '_').toLowerCase()}_rep">
             </div>
             `
         }
@@ -584,11 +584,93 @@ async function showSetExercises() {
 
     container_exercise.innerHTML += `               
     <div class="button_input" id="button_input">
-        <button class="button button_set">Registrar serie</button>
+        <button class="button button_set" onclick="registerTrainingSet()">Registrar serie</button>
     </div>`
 }
 
+async function registerLog(id_training_exercise) {
+    let response = await fetch("/treino-serie/cadastrar-log", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            idTrainingExerciseServer: id_training_exercise
+        })
+    })
 
+    let json = await response.json()
+
+    return json
+}
+
+async function registerSet(setOrder, idTrainingLog, rep, weight) {
+    let response = await fetch("/treino-serie/cadastrar-serie", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            setOrderServer: setOrder,
+            idTrainingLogServer: idTrainingLog,
+            repServer: rep,
+            weightServer: weight,
+        })
+    })
+
+    let json = await response.json()
+
+    return json
+}
+
+async function registerTrainingSet() {
+    let names_exercises = document.querySelectorAll(".name_exercise")
+
+    let boolean = validatingRegisterTraining()
+    if (!boolean) {
+        return console.log("ERRO")
+    }
+
+    for (let i = 0; i < names_exercises.length; i++) {
+        const id_training_exercise = names_exercises[i].id;
+        let json = await registerLog(id_training_exercise)
+        let insertId = json.insertId
+        let name = names_exercises[i].textContent.trim().replaceAll(" ", "_").toLowerCase()
+        console.log(name)
+        let name_weight = document.querySelectorAll(`.${name}_weight`)
+        let name_rep = document.querySelectorAll(`.${name}_rep`)
+        console.log(name_weight, name_rep)
+        for (let i = 0; i < name_weight.length && i < name_rep.length; i++) {
+            console.log("AAA")
+            let setOrder = name_rep[i].id
+            let rep = name_rep[i].value
+            let weight = name_weight[i].value
+            let json = await registerSet(setOrder, insertId, rep, weight)
+        }
+    }
+}
+
+function validatingRegisterTraining() {
+    let names_exercises = document.querySelectorAll(".name_exercise")
+    let boolean = true
+    for (let i = 0; i < names_exercises.length; i++) {
+        const id_training_exercise = names_exercises[i].id;
+        let name = names_exercises[i].textContent.trim().replaceAll(" ", "_").toLowerCase()
+        let name_weight = document.querySelectorAll(`.${name}_weight`)
+        let name_rep = document.querySelectorAll(`.${name}_rep`)
+        for (let i = 0; i < name_weight.length && i < name_rep.length; i++) {
+            let setOrder = name_rep[i].id
+            let rep = name_rep[i].value
+            let weight = name_weight[i].value
+            if (!setOrder || !rep || !weight || setOrder <= 0 || rep <= 0 || weight <= 0) {
+                boolean = false
+                return boolean
+            }
+        }
+    }
+
+    return boolean
+}
 async function initDash() {
     await showFrequencyDay()
     await showFrequencyHour()

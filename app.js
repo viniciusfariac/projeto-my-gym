@@ -22,6 +22,7 @@ var treinoRouter = require("./src/routes/treinos");
 var muscleRouter = require("./src/routes/muscleGroup")
 var exerciseRouter = require("./src/routes/exercise");
 var treinoRegistroRouter = require("./src/routes/treinoRegistro")
+var treinoSerieRouter = require("./src/routes/treinoSerie")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +37,7 @@ app.use("/treinos", treinoRouter);
 app.use("/muscle", muscleRouter)
 app.use("/exercise", exerciseRouter)
 app.use("/treino-registro", treinoRegistroRouter)
+app.use("/treino-serie", treinoSerieRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`
