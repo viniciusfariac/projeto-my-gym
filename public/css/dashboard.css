@@ -293,10 +293,6 @@ main {
     color: var(--text-dark);
     opacity: 0.5;
 }
-/* Estilização botão para enviar serie */
-.button_input {
-    margin: 0 auto;
-}
 
 
 /* Background color do botão */
@@ -304,6 +300,7 @@ main {
 
 .button_set {
     background-color: var(--bg-third);
+    margin-bottom: 2rem;
 }
 
 .button_set:hover {
@@ -314,6 +311,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 /* Tirando setinha do type number navegadores*/

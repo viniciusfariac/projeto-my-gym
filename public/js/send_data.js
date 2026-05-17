@@ -308,6 +308,7 @@ async function showGraphTraining(func, graph, data) {
         let training_date = value.training_date
         let date = new Date(training_date)
         let month = date.getMonth() + 1
+        let formatted_date = new Intl.DateTimeFormat('pt-BR').format(date)
 
         let month_exist = false
         let index = -1
@@ -348,9 +349,19 @@ async function showGraphTraining(func, graph, data) {
             data: data_opt,
             borderWidth: 2
         })
-
-        labels_lines.push(`${i + 1} Série`)
     }
+
+    let length_lines = 0
+
+    datasets.forEach(value => {
+        length_lines = length_lines > value.data.length ? length_lines : value.data.length
+    })
+
+    for (let i = 1; i <= length_lines; i++) {
+        labels_lines.push(`${i}º Treino`)
+    }
+
+    console.log("labels_lines: ", labels_lines)
 
     graph.data = {
         "labels": labels_lines,
@@ -585,6 +596,9 @@ async function showSetExercises() {
     container_exercise.innerHTML += `               
     <div class="button_input" id="button_input">
         <button class="button button_set" onclick="registerTrainingSet()">Registrar serie</button>
+        <div class="container_message_text">
+            <p class="message_text" id="message_text"></p>
+        </div>
     </div>`
 }
 
@@ -625,10 +639,16 @@ async function registerSet(setOrder, idTrainingLog, rep, weight) {
 
 async function registerTrainingSet() {
     let names_exercises = document.querySelectorAll(".name_exercise")
+    let message_text = document.getElementById("message_text")
+
 
     let boolean = validatingRegisterTraining()
     if (!boolean) {
-        return console.log("ERRO")
+        message_text.style.color = "#DC2626"
+        message_text.innerHTML = "Preencha todos os campos"
+        message_text.style.opacity = "1"
+        message_text.style.transform = "translateX(0)"
+        return
     }
 
     for (let i = 0; i < names_exercises.length; i++) {
@@ -641,13 +661,17 @@ async function registerTrainingSet() {
         let name_rep = document.querySelectorAll(`.${name}_rep`)
         console.log(name_weight, name_rep)
         for (let i = 0; i < name_weight.length && i < name_rep.length; i++) {
-            console.log("AAA")
             let setOrder = name_rep[i].id
             let rep = name_rep[i].value
             let weight = name_weight[i].value
             let json = await registerSet(setOrder, insertId, rep, weight)
         }
     }
+
+    message_text.style.opacity = "1"
+    message_text.style.transform = "translateX(0)"
+    message_text.style.color = "#16A34A"
+    message_text.innerHTML = "Treino cadastrado com sucesso"
 }
 
 function validatingRegisterTraining() {

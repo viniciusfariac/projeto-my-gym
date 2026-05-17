@@ -129,19 +129,56 @@
     let nome = sessionStorage.NOME_USUARIO
     user_name.innerHTML = nome.toUpperCase()
 
+    const defaultOptions = {
+        responsive: true,
+
+        plugins: {
+            legend: {
+                labels: {
+                    color: "#FFF",
+                    font: {
+                        size: 14
+                    }
+                },
+            }
+        },
+
+        scales: {
+            x: {
+                ticks: {
+                    color: "#FFFF"
+                },
+                grid: {
+                    color: "rgba(255,255,255,0.02)"
+                }
+            },
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+                    color: "#FFF"
+                },
+
+                grid: {
+                    color: "rgba(255,255,255,0.02)"
+                }
+            }
+        },
+
+        animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
+        }
+    }
+
     let graph_weight = document.getElementById("graph_weight")
 
     let chart_weight = new Chart(graph_weight, {
         type: 'line',
 
-        options: {
-
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
+        options: defaultOptions
     });
 
     let graph_average = document.getElementById("graph_average")
@@ -149,14 +186,7 @@
     let chart_average = new Chart(graph_average, {
         type: 'line',
 
-        options: {
-
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
+        options: defaultOptions
     });
 
 
