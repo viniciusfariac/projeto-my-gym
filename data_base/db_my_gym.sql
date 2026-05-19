@@ -174,6 +174,74 @@ INSERT INTO exercise (exercise_name, muscle_id, description) VALUES
 ('Rosca punho', 13, 'Flexão de punho'),
 ('Rosca reversa', 13, 'Extensores do antebraço');
 
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/bench-press/bench-press-800.jpg' WHERE exercise_name = 'Supino reto com barra';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/incline-bench-press/incline-bench-press-800.jpg' WHERE exercise_name = 'Supino inclinado com barra';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/dumbbell-fly/dumbbell-fly-800.jpg' WHERE exercise_name = 'Crucifixo com halteres';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/cable-crossover/cable-crossover-800.jpg' WHERE exercise_name = 'Cross over no cabo';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/pull-ups/pull-ups-800.jpg' WHERE exercise_name = 'Barra fixa';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/lat-pulldown/lat-pulldown-800.jpg' WHERE exercise_name = 'Pulley frente';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/bent-over-row/bent-over-row-800.jpg' WHERE exercise_name = 'Remada curvada';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/one-arm-dumbbell-row/one-arm-dumbbell-row-800.jpg' WHERE exercise_name = 'Remada unilateral com halter';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/barbell-curl/barbell-curl-800.jpg' WHERE exercise_name = 'Rosca direta barra';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/hammer-curl/hammer-curl-800.jpg' WHERE exercise_name = 'Rosca martelo';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/spider-curl/spider-curl-800.jpg' WHERE exercise_name = 'Bíceps spyder';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/skullcrusher/skullcrusher-800.jpg' WHERE exercise_name = 'Tríceps testa';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/tricep-pushdown/tricep-pushdown-800.jpg' WHERE exercise_name = 'Tríceps corda';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/bench-dips/bench-dips-800.jpg' WHERE exercise_name = 'Tríceps no banco';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/squat/squat-800.jpg' WHERE exercise_name = 'Agachamento livre';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/leg-press/leg-press-800.jpg' WHERE exercise_name = 'Leg press';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/leg-extension/leg-extension-800.jpg' WHERE exercise_name = 'Cadeira extensora';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/stiff-leg-deadlift/stiff-leg-deadlift-800.jpg' WHERE exercise_name = 'Stiff com barra';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/lying-leg-curl/lying-leg-curl-800.jpg' WHERE exercise_name = 'Mesa flexora';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/seated-leg-curl/seated-leg-curl-800.jpg' WHERE exercise_name = 'Cadeira flexora';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/hip-thrust/hip-thrust-800.jpg' WHERE exercise_name = 'Elevação pélvica';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/glute-bridge/glute-bridge-800.jpg' WHERE exercise_name = 'Glute bridge';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/standing-calf-raise/standing-calf-raise-800.jpg' WHERE exercise_name = 'Panturrilha em pé';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/seated-calf-raise/seated-calf-raise-800.jpg' WHERE exercise_name = 'Panturrilha sentado';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/seated-dumbbell-press/seated-dumbbell-press-800.jpg' WHERE exercise_name = 'Desenvolvimento com halteres';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/lateral-raise/lateral-raise-800.jpg' WHERE exercise_name = 'Elevação lateral';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/front-raise/front-raise-800.jpg' WHERE exercise_name = 'Elevação frontal';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/crunch/crunch-800.jpg' WHERE exercise_name = 'Abdominal crunch';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/plank/plank-800.jpg' WHERE exercise_name = 'Prancha';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/leg-raise/leg-raise-800.jpg' WHERE exercise_name = 'Elevação de pernas';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/adductor-machine/adductor-machine-800.jpg' WHERE exercise_name = 'Cadeira adutora';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/abductor-machine/abductor-machine-800.jpg' WHERE exercise_name = 'Cadeira abdutora';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/wrist-curl/wrist-curl-800.jpg' WHERE exercise_name = 'Rosca punho';
+
+UPDATE exercise SET url_image = 'https://static.strengthlevel.com/images/exercise/reverse-curl/reverse-curl-800.jpg' WHERE exercise_name = 'Rosca reversa';
+
 INSERT INTO training (user_id, name_training, suggest_day) VALUES
 -- Vinicius
 (1, 'Upper A', 'Terça'),
@@ -187,7 +255,9 @@ INSERT INTO training (user_id, name_training, suggest_day) VALUES
 -- Maria
 (3, 'Full Body A', 'Terça'),
 (3, 'Full Body B', 'Quinta');
-
+SELECT * FROM training_exercise te
+JOIN training_log tl ON tl.training_exercise_id = te.id_training_exercise
+WHERE te.id_training_exercise = 2;
 INSERT INTO training_exercise (exercise_id, training_id, set_exercise) VALUES
 -- Upper A (1)
 (1, 1, 3),
@@ -231,11 +301,11 @@ INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VAL
 (2, 3, 10, 30, 'Trabalho'),
 (3, 3, 6, 40, 'Falha');
 
-INSERT INTO training_set (set_order, training_log_id, rep, weight, type_set) VALUES
+INSERT INTO training_set (set_order, training_log_id, rep, weight) VALUES
 -- Semana 1
-(1, 1, 12, 20, 'Trabalho'),
-(2, 1, 10, 22, 'Trabalho'),
-(3, 1, 8, 24, 'Falha'),
+(1, 1, 12, 20),
+(2, 1, 10, 22),
+(3, 1, 8, 24),
 
 (1, 2, 12, 18, 'Trabalho'),
 (2, 2, 10, 20, 'Trabalho'),

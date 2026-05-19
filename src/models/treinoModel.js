@@ -126,7 +126,8 @@ function graficoEvolucaoRep(id_user, id_training_exercise) {
     tr.training_exercise_id = ${id_training_exercise}
   AND
     DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) <= tr.training_date
-  GROUP BY DATE(tr.training_date);
+  GROUP BY DATE(tr.training_date)
+  ORDER BY training_date;
   `
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);

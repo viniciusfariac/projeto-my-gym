@@ -304,7 +304,11 @@ async function showGraphTraining(func, graph, data) {
 
     let json = await func(id_exercise, id_user)
 
-    let grouped = []
+    let grouped = [
+        {
+            "datas": []
+        }
+    ]
     let datasets = []
     let labels_lines = []
 
@@ -314,30 +318,32 @@ async function showGraphTraining(func, graph, data) {
         let month = date.getMonth() + 1
         let formatted_date = new Intl.DateTimeFormat('pt-BR').format(date)
 
-        let month_exist = false
-        let index = -1
+        // let month_exist = false
+        // let index = -1
 
-        for (let i = 0; i < grouped.length; i++) {
-            const element = grouped[i];
 
-            if (element.month == month) {
-                month_exist = true
-                index = i
-                break
-            }
-        }
 
-        if (!month_exist) {
-            grouped.push({
-                "month": month,
-                "datas": []
-            })
-            index = grouped.length - 1
-        }
+        // for (let i = 0; i < grouped.length; i++) {
+        //     const element = grouped[i];
+
+        //     if (element.month == month) {
+        //         month_exist = true
+        //         index = i
+        //         break
+        //     }
+        // }
+
+        // if (!month_exist) {
+        //     grouped.push({
+        //         "month": month,
+        //         "datas": []
+        //     })
+        //     index = grouped.length - 1
+        // }
         if (data == "average_rep") {
-            grouped[index].datas.push(value.average_rep)
+            grouped[0].datas.push(value.average_rep)
         } else if (data == "max_weight") {
-            grouped[index].datas.push(value.max_weight)
+            grouped[0].datas.push(value.max_weight)
         }
 
     })
@@ -345,11 +351,10 @@ async function showGraphTraining(func, graph, data) {
     for (let i = 0; i < grouped.length; i++) {
         const element = grouped[i];
 
-        let month = element.month
         let data_opt = element.datas
 
         datasets.push({
-            label: `Progressão mês ${month}`,
+            label: `Progressão de ${data == "average_rep" ? "repetições" : "carga"}`,
             data: data_opt,
             borderWidth: 2
         })
